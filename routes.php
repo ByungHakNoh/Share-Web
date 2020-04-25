@@ -1,12 +1,12 @@
 <?php
 
-$router->define([
-    '' => 'controllers/index.php',
-    'news' => 'controllers/news.php',
-    'information' => 'controllers/information.php',
-    'board' => 'controllers/board.php',
-    'broadcast' => 'controllers/broadcast.php',
-    'login' => 'controllers/login.php',
-    'register' => 'controllers/register.php',
-    'practice' => 'controllers/1_practice.php',
-]);
+$router->get('', 'controllers/index.php');
+$router->get('news', 'controllers/news.php');
+$router->get('information', 'controllers/information.php');
+$router->get('board', 'controllers/board.php');
+// 연습용으로 get으로 바꾸기
+$router->post('login', 'controllers/login.php');
+$router->get('register', 'controllers/register.php');
+$router->get('practice', 'controllers/1_practice.php');
+
+var_dump($_SERVER['REQUEST_METHOD']);

@@ -4,4 +4,4 @@ require 'core/CoreBundle.php';
 
 $uri = RequestURI::uriPath();
 
-require Router::load('routes.php')->direct($uri);
+require Router::load('routes.php')->direct($uri, RequestURI::defineRequestType());
