@@ -8,7 +8,7 @@
 
 <body>
 
-    <?php require('holder/headPage.php'); ?>
+    <?php require('holder/mainHeadPage.php'); ?>
 
     <div class="post_box">
         패션 소식

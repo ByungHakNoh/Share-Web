@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <?php require('holder/headPage.php'); ?>
+    <?php require('holder/mainHeadPage.php'); ?>
 
 </body>
 
