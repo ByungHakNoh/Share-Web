@@ -12,7 +12,7 @@ class RequestURI
         );
     }
 
-    // GET POST type을 return 하는 메소드
+    // GET, POST type을 return 하는 메소드
     public static function defineRequestType()
     {
         return $_SERVER['REQUEST_METHOD'];
