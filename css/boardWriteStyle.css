@@ -1,0 +1,53 @@
+.writeContainer {
+  height: auto;
+  width: auto;
+  margin-top: 50px;
+  padding: 10px;
+  position: absolute;
+  left: 19%;
+}
+
+.writeContainer form {
+  width: 1200px;
+  display: inline-block;
+}
+
+.writeContainer h4 {
+  font-weight: 800;
+}
+
+.writeContainer form input[type="text"] {
+  width: 600px;
+  height: 40px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  border: none;
+  border-bottom: 1px solid darkgray;
+  background: transparent;
+  outline: none;
+  height: 35px;
+  font-size: 20px;
+  text-align: start;
+}
+
+.writeContainer form input[type="submit"] {
+  float: right;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  border: 0;
+  background: rgb(38, 146, 71);
+  border-radius: 4px;
+  box-shadow: 0 5px 0 rgb(38, 146, 71);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+  padding: 12px 20px;
+  transition: all 0.05s linear;
+  font-weight: 900;
+}
+
+.writeContainer form input[type="submit"]:hover {
+  box-shadow: 0 2px 0 rgb(38, 146, 71);
+  transform: translateY(3px);
+}
