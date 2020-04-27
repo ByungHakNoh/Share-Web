@@ -34,7 +34,7 @@ body {
 
 /* 로고 버튼 스타일 */
 .logo {
-  margin-top: 70px;
+  margin-top: 80px;
   margin-bottom: 70px;
   text-align: center;
 }
@@ -79,28 +79,4 @@ body {
 .navigation ul li a:hover {
   background-color: #555555;
   border-radius: 2px;
-}
-
-.homeMainBoard {
-  height: auto;
-  width: auto;
-  text-align: center;
-  padding: 10px;
-}
-
-.homeMainBoard div {
-  display: inline-block;
-  width: 1000px;
-  height: 400px;
-  margin-top: 50px;
-  margin-bottom: 20px;
-  padding: 10px;
-  text-align: center;
-  border: 3px;
-  border-style: solid;
-  border-color: white;
-  background-color: white;
-  font-size: 20px;
-  font-weight: 700;
-  box-shadow: 5px 5px 5px gainsboro;
 }
