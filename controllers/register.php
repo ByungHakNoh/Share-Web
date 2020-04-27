@@ -36,7 +36,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'password' => '"' . $password . '"'
             ]);
 
-            header('Location: /login?register=성공');
+            // 회원 가입 성공시 알림창이 띄워지고 확인을 누르면 로그인 페이지로 이동
+            echo "<script language='javascript'>alert('회원가입 성공!! 로그인 해보세요')
+            document.location.href='/login';</script>";
         } else {
 
             array_push($errorsArray, '비밀번호 확인을 확인해주세요');
