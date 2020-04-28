@@ -6,14 +6,20 @@
 }
 
 body {
-  background-image: url(../src/image/fashion_background.jpg);
+  background-image: url(/src/image/fashion_background.jpg);
   background-size: cover;
   background-position: center;
 }
 
-/* .background {
+.logo img {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 20px;
+  width: 200px;
+  height: 150px;
+}
 
-} */
 .container {
   width: 380px;
   height: auto;
@@ -77,11 +83,11 @@ input[type="passwordCheck"] {
 }
 
 .container a {
-  /* text-decoration: none; */
-  font-size: 12px;
+  text-decoration: none;
+  font-size: 13px;
   line-height: 20px;
   color: darkgray;
-  margin: 27px;
+  margin: 25px;
 }
 
 .icon {
@@ -93,14 +99,15 @@ input[type="passwordCheck"] {
   left: calc(50% - 50px);
 }
 
-.warnging {
-  width: 300px;
-  height: auto;
-  margin-bottom: 20px;
-  color: red;
+.container form span {
+  font-size: 12px;
+  display: none;
 }
 
-.warnging li {
-  list-style: none;
-  font-size: 13px;
+#passwordSuccess {
+  color: rgb(67, 212, 67);
+}
+
+#passwordFailed {
+  color: red;
 }

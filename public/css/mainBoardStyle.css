@@ -13,7 +13,7 @@
 
 .boardContainer thead th {
   height: 40px;
-  border-top: 2px solid #09c;
+  border-top: 2px solid rgb(145, 165, 145);
   border-bottom: 1px solid #ccc;
   font-weight: bold;
   font-size: 17px;
@@ -27,13 +27,35 @@
   font-size: 14px;
 }
 
-/* 자유계시판 글쓰기 버튼 스타일 */
-.boardContainer div {
-  margin-top: 20px;
-  margin-left: 1050px;
+.pagination {
+  margin: 20px;
 }
 
-.boardContainer div a button {
+.pagination a button {
+  width: 28px;
+  height: 28px;
+  font-weight: 800;
+  margin: 3px;
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  outline: none;
+  font-weight: 900;
+}
+
+.pagination a button:hover {
+  transform: translateY(3px);
+}
+
+/* 자유계시판 글쓰기 버튼 스타일 */
+.wirte {
+  margin-top: 20px;
+  margin-left: 1050px;
+  margin-bottom: 50px;
+}
+
+.wirte a button {
   border: 0;
   background: rgb(38, 146, 71);
   border-radius: 4px;
@@ -47,7 +69,7 @@
   font-weight: 900;
 }
 
-.boardContainer div a button:hover {
+.wirte a button:hover {
   box-shadow: 0 2px 0 rgb(38, 146, 71);
   transform: translateY(3px);
 }
