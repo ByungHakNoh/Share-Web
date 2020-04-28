@@ -2,7 +2,6 @@
     <ul>
         <li><a href="/login">로그인</a></li>
         <li><a href="/register">회원가입</a></li>
-        <li><a href="/practice">연습용</a></li>
     </ul>
     <br />
 </nav>
