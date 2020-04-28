@@ -26,19 +26,27 @@
                 </tr>
             </thead>
 
-            <!-- 바디 부분 테스트용으로 바꿔야 함 -->
+            <?php foreach ($postList as $post) : ?>
             <tbody>
                 <tr>
-                    <td width="70">1</td>
-                    <td width="700">이거 좀 보셈</a></td>
-                    <td width="150">대박</td>
-                    <td width="120">정말?</td>
-                    <td width="100">오우</td>
+                    <td width="70"><?= $post->getID(); ?></td>
+                    <td width="700"><a href=<?= '/board-read?id=' . $post->getID(); ?>><?= $post->getTitle(); ?></a>
+                    </td>
+                    <td width="150"><?= $post->getWriter(); ?></td>
+                    <td width="120"><?= $post->getDate(); ?></td>
+                    <td width="100"><?= $post->getHit(); ?></td>
                 </tr>
             </tbody>
+            <?php endforeach; ?>
         </table>
 
-        <div>
+        <div class="pagination">
+            <?php for ($page = 1; $page <= $numberOfPage; $page++) { ?>
+            <a href=<?= "/board?page={$page}" ?>><button><?= $page ?></button></a>
+            <?php } ?>
+        </div>
+
+        <div class="wirte">
             <a href="/board-write"><button>글쓰기</button></a>
         </div>
     </div>
