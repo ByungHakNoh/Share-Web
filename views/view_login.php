@@ -9,12 +9,12 @@
 </head>
 
 <body>
-
+    <?php require('holder/signIn/bodyHeadPage.php'); ?>
     <div class=container>
         <img src="src/image/log_in.png" class="icon">
         <h1>로그인 하기</h1>
 
-        <form method="POST" action="/practice2">
+        <form method="POST" action="/login-startsession">
             <p>사용자 아이디</p>
             <input type="text" name="userID" placeholder="이메일 입력">
 
