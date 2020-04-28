@@ -1,5 +1,6 @@
 <?php
 
+// 앱에 필요한 config 정보를 저장하는 배열을 반환한다.
 return [
     'database' => [
         'connection' => 'mysql:host=127.0.0.1',
