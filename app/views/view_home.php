@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Share</title>
+    <title>share - home</title>
     <?php require('holder/main/linkCss.php'); ?>
     <link rel="stylesheet" href="public/css/mainHomeStyle.css?after">
 </head>
