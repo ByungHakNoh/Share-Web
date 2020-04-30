@@ -1,17 +1,21 @@
 <?php
 
-class UserController
+namespace app\controllers;
+
+use core\mvc\Controller;
+
+class UserController extends Controller
 {
 
     public function register()
     {
-
-        return loadView('register');
+        $view = $this->createView('register');
+        return $view->loadView();
     }
 
     public function login()
     {
-
-        return loadView('login');
+        $view = $this->createView('login');
+        return $view->loadView();
     }
 }
