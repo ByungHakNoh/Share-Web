@@ -1,5 +1,10 @@
 <?php
 
+namespace core\database;
+
+use PDO;
+use FFI\Exception;
+
 class QueryBuilder
 {
 
@@ -17,13 +22,6 @@ class QueryBuilder
         $statement = $this->pdo->prepare("select * from {$table}");
         $statement->execute();
         return $statement;
-    }
-
-    public function getRowCount($table)
-    {
-        $statement = $this->pdo->prepare("select * from {$table}");
-        $statement->execute();
-        return $statement->rowCount();
     }
 
     // selectTable 메소드를 실행 후 모든 값들을 쿼리하는 메소드 
@@ -115,22 +113,15 @@ class QueryBuilder
     // 페이지의 갯수를 결정하는 메소드
     public function paginationPageNum($tableName, $resultPerPage)
     {
-
         // 자유 계시판 계시글 전체 갯수를 받아온다.
-        $totalRowCount = $this->getRowCount($tableName);
+        $totalRowCount = $this->selectTable($tableName)->rowCount();
         // 페이지의 갯수 선언
         return ceil($totalRowCount / $resultPerPage);
     }
 
     // 한 페이지에 보여줄 데이터를 쿼리하는 메소드
-    public function pagination($tableName, $dataClass, $valuesPerPage)
+    public function pagination($tableName, $dataClass, $currentPage, $valuesPerPage)
     {
-        if (isset($_GET['page'])) {
-            $currentPage = $_GET['page'];
-        } else {
-            $currentPage = 1;
-        }
-
         // 데이터 저장소에서 계시판 정보 불러와야함
         $startNumber = ($currentPage - 1) * $valuesPerPage;
 
