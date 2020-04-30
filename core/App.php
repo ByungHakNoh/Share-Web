@@ -1,5 +1,9 @@
 <?php
 
+namespace core;
+
+use FFI\Exception;
+
 // 웹 동작에 있어서 필요한 정보를 registry 배열에 저장하는 static 클래스이다. 
 class App
 {

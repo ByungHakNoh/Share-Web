@@ -1,12 +1,17 @@
 <?php
 
+namespace core\database;
+
+use PDO;
+use PDOException;
+
 class Connection
 {
-    public static function connect_db($config)
+    public static function connectDB($config)
     {
         try {
 
-            return $pdo = new PDO(
+            return new PDO(
                 $config['connection'] . ';dbname=' . $config['dbName'],
                 $config['userName'],
                 $config['password'],

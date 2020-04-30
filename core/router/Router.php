@@ -1,5 +1,9 @@
 <?php
 
+namespace core\router;
+
+use FFI\Exception;
+
 class Router
 {
     protected $routes = [
@@ -43,17 +47,17 @@ class Router
             return $this->callAction(
                 ...explode('@', $this->routes[$requestType][$uri])
             );
+        } else {
+            // 동작하지 않음 -> 페이지 자체가 실행되지 않기 때문 -> 페이지 디버깅 방법 찾기
+            throw new Exception('URI 정확하지 않음');
         }
-
-        // 동작하지 않음 -> 페이지 자체가 실행되지 않기 때문 -> 페이지 디버깅 방법 찾기
-        throw new Exception('URI 정확하지 않음');
     }
 
     protected function callAction($controller, $action)
     {
 
+        $controller  = "app\controllers\\{$controller}";
         $controller = new $controller;
-
         if (method_exists($controller, $action)) {
 
             return $controller->$action();
