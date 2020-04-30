@@ -14,6 +14,6 @@ $router->get('login', 'UserController@login');
 $router->get('register', 'UserController@register');
 
 // 포스트 메소드로 넘어온 정보를 처리하는 루트
-$router->post('registerHandler', 'PagesController@home');
-$router->post('board-writeHandler', 'PagesController@home');
-$router->post('login-startsession', 'PagesController@home');
+$router->post('registerHandler', 'PostController@register');
+$router->post('board-writeHandler', 'PostController@boardWrite');
+// $router->post('login-startsession', 'PagesController@home');
