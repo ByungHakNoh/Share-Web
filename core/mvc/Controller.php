@@ -22,11 +22,4 @@ class Controller
         $model = "app\models\\{$model}";
         return new $model;
     }
-
-    public function createPostModel($model)
-    {
-        require "app/models/post/{$model}.php";
-        $model = "app\models\post\\{$model}";
-        return new $model;
-    }
 }
