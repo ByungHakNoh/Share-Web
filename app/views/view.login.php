@@ -5,11 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>로그인</title>
-    <?php require('holder/signIn/linkCss.php'); ?>
+    <link rel="stylesheet" href="public/css/loginStyle.css?after">
+    <script defer src="app/views/javascript/login.js"></script>
 </head>
 
 <body>
-    <?php require('holder/signIn/bodyHeadPage.php'); ?>
+    <div class="logo">
+        <a href="/"><img src="/src/image/img.png" alt="logo" /></a>
+    </div>
     <div class=container>
         <img src="src/image/log_in.png" class="icon">
         <h1>로그인 하기</h1>
@@ -21,7 +24,7 @@
             <p>비밀번호</p>
             <input type="password" name="password" placeholder="비밀번호 입력">
 
-            <input type="submit" value="로그인">
+            <input id="submitBtn" type="submit" value="로그인">
             <a href="#">아이디/비밀번호 찾기</a>
             <a href="/register">회원가입하기</a>
         </form>
