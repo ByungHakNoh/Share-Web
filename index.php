@@ -6,7 +6,6 @@ use core\router\{Router, RequestURI};
 require 'core/CoreBundle.php';
 require 'app/controllers/MainController.php';
 require 'app/controllers/UserController.php';
-require 'app/controllers/PostController.php';
 
 
 // 라우팅을 위한 작업
