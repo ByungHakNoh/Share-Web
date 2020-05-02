@@ -17,6 +17,6 @@ class View
     public function loadView()
     {
         extract($this->data);
-        return require "app/views/view_{$this->view}.php";
+        return require "app/views/view.{$this->view}.php";
     }
 }
