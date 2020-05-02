@@ -1,0 +1,168 @@
+* {
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+body {
+  background-color: rgb(241, 240, 234);
+}
+
+.logo img {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  margin-top: 20px;
+  width: 200px;
+  height: 150px;
+}
+
+.container {
+  margin-top: 200px;
+  margin-bottom: 200px;
+  width: 600px;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 10px 30px;
+  border-radius: 10%;
+  box-sizing: border-box;
+}
+
+h1 {
+  padding: 0 0 20px;
+  margin-bottom: 15px;
+}
+
+.container p {
+  margin-top: 25px;
+  padding: 0;
+  font-weight: bold;
+}
+
+.container input {
+  width: 100%;
+  border-radius: 20px;
+  padding-left: 10px;
+}
+
+.container input[type="text"],
+input[type="password"],
+input[type="passwordCheck"] {
+  margin-top: 10px;
+  border: 1px solid grey;
+  background: transparent;
+  height: 45px;
+  background-color: white;
+  color: black;
+  font-size: 16px;
+}
+
+.container select {
+  width: 200px;
+  padding: 0.8em 0.5em;
+  border: 1px solid grey;
+  border-radius: 0px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+  font-style: bold;
+}
+
+.container input[type="submit"] {
+  border: none;
+  outline: none;
+  height: 40px;
+  background: rgb(38, 146, 71);
+  color: black;
+  font-size: 18px;
+  font-weight: 800;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.container input[type="submit"]:hover {
+  cursor: pointer;
+  background: #ffc107;
+  color: black;
+}
+
+.container input[type="submit"]:disabled {
+  background: red;
+  background-image: url();
+}
+
+.container input[type="checkbox"] {
+  position: relative;
+  top: -20px;
+  left: -285px;
+}
+
+.container label {
+  position: relative;
+  top: 10px;
+  left: 30px;
+}
+
+.container a {
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 20px;
+  color: black;
+  margin: 25px;
+}
+
+.container form small.valid {
+  color: green;
+}
+
+.container form small.inValid {
+  color: red;
+}
+
+#passwordSuccess {
+  color: rgb(67, 212, 67);
+}
+
+#passwordFailed {
+  color: red;
+}
+
+#nickName {
+  width: 300px;
+}
+
+#submitBtnText {
+  color: red;
+}
+
+.checkCircle {
+  background-image: url(/src/image/checkIcon.jpg);
+}
+
+.container form small {
+  padding-left: 10px;
+}
+
+.collectInfo {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  height: 100px;
+  background-color: white;
+  overflow: scroll;
+}
+
+.collectInfo p {
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.formController.success input {
+  border-color: #2ecc71;
+}
+
+.formController.error input {
+  border-color: red;
+}
