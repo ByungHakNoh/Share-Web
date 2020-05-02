@@ -24,10 +24,15 @@ class QueryBuilder
         return $statement;
     }
 
-    // selectTable 메소드를 실행 후 모든 값들을 쿼리하는 메소드 
-    public function fetchAllValues($statement)
+    public function fetchAllByArray($statement)
     {
         return $statement->fetchAll(PDO::FETCH_OBJ);
+    }
+
+    // selectTable 메소드를 실행 후 모든 값들을 쿼리하는 메소드 
+    public function fetchAllValues($statement, $dataClass)
+    {
+        return $statement->fetchAll(PDO::FETCH_CLASS, $dataClass);
     }
 
     // 제한된 개수만을 쿼리하는 메소드
