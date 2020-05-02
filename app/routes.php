@@ -8,12 +8,13 @@ $router->get('information', 'PagesController@information');
 $router->get('board', 'PagesController@board');
 $router->get('board-read', 'PagesController@boardRead');
 $router->get('board-write', 'PagesController@boardWrite');
+$router->post('board-writeHandler', 'PagesController@boardWrite');
 $router->get('broadcast', 'PagesController@broadcast');
 // 로그인 및 회원가입 루트
 $router->get('login', 'UserController@login');
 $router->get('register', 'UserController@register');
+$router->post('registerHandler', 'UserController@register');
 
 // 포스트 메소드로 넘어온 정보를 처리하는 루트
-$router->post('registerHandler', 'PostController@register');
-$router->post('board-writeHandler', 'PostController@boardWrite');
+// $router->post('registerHandler', 'PostController@register');
 // $router->post('login-startsession', 'PagesController@home');
