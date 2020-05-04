@@ -7,6 +7,11 @@
     <title>Share - board</title>
     <?php require('holder/main/linkCss.php'); ?>
     <link rel="stylesheet" href="public/css/mainBoardStyle.css?after">
+
+    <script>
+    let isLogin = ("<?= isset($_SESSION['userID']) ?>");
+    </script>
+    <script defer src="app/views/javascript/board.js"></script>
 </head>
 
 <body>
@@ -41,13 +46,31 @@
         </table>
 
         <div class="pagination">
+
+            <!-- 이전 버튼 생성 -->
+            <?php if ($currentPage > 1) : ?>
+            <a href=<?= '/board?page=' . ($currentPage - 1) ?>><button id="previousBtn">이전</button></a>
+            <?php endif; ?>
+
+            <!-- 페이징 버튼 생성 -->
             <?php for ($page = 1; $page <= $numberOfPage; $page++) { ?>
+
+            <?php if ($currentPage == $page) : ?>
+            <a href=<?= "/board?page={$page}" ?>><button class="active"><?= $page ?></button></a>
+            <?php else : ?>
             <a href=<?= "/board?page={$page}" ?>><button><?= $page ?></button></a>
+            <?php endif; ?>
+
             <?php } ?>
+
+            <!-- 다음 버튼 생성 -->
+            <?php if ($currentPage < $numberOfPage) : ?>
+            <a href=<?= '/board?page=' . ($currentPage + 1) ?>><button id="nextBtn">다음</button></a>
+            <?php endif; ?>
         </div>
 
         <div class="wirte">
-            <a href="/board-write"><button>글쓰기</button></a>
+            <a href="/board-write"><button id="writeBtn">글쓰기</button></a>
         </div>
     </div>
 
