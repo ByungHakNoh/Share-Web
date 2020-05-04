@@ -1,7 +1,7 @@
 .readContainer {
   height: auto;
   width: 1000px;
-  margin-top: 30px;
+  padding-top: 30px;
   margin-bottom: 50px;
   border: 1px solid rgb(231, 224, 224);
   background-color: rgb(248, 248, 248);
@@ -29,6 +29,59 @@
   margin-left: 5px;
   margin-bottom: 5px;
 }
+
+.btnContainer {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.btnContainer form input[type="submit"] {
+  border: 0;
+  float: right;
+  margin-right: 20px;
+  background: rgb(38, 146, 71);
+  border-radius: 4px;
+  box-shadow: 0 5px 0 rgb(38, 146, 71);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+  padding: 12px 20px;
+  transition: all 0.05s linear;
+  font-weight: 900;
+}
+
+.btnContainer form input[type="submit"] :hover {
+  box-shadow: 0 2px 0 rgb(38, 146, 71);
+  transform: translateY(3px);
+}
+
+.commentContainer {
+  height: auto;
+  width: auto;
+  margin-top: 120px;
+  padding-left: 40px;
+  padding-right: 40px;
+}
+.commentContainer form textarea {
+  margin-top: 50px;
+  width: 850px;
+  height: 60px;
+  resize: none;
+  font-size: 13px;
+}
+
+.commentContainer form input[type="submit"] {
+  height: 60px;
+  width: 60px;
+  position: relative;
+  top: -26px;
+  border-radius: 4px;
+  outline: none;
+  font: inherit;
+  font-weight: 800;
+}
+
 #information {
   border-bottom: 10px solid rgb(150, 144, 144);
   border-radius: 5%;
@@ -40,4 +93,12 @@
 #content {
   padding: 10px;
   margin: 10px;
+}
+
+#line {
+  background-color: black;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  width: 100%;
+  height: 1px;
 }
