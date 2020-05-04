@@ -5,6 +5,7 @@ use core\database\{NameController, QueryBuilder, Connection};
 
 require 'core/mvc/View.php';
 require 'core/mvc/Controller.php';
+require 'core/mvc/Model.php';
 require 'core/router/Router.php';
 require 'core/router/RequestURI.php';
 require 'core/database/Connection.php';
