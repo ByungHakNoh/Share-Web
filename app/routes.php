@@ -5,16 +5,18 @@ $router->get('', 'PagesController@home');
 $router->get('news', 'PagesController@news');
 $router->get('information', 'PagesController@information');
 // 자유계시판 관련 루트
-$router->get('board', 'PagesController@board');
-$router->get('board-read', 'PagesController@boardRead');
-$router->get('board-write', 'PagesController@boardWrite');
-$router->post('board-writeHandler', 'PagesController@boardWrite');
+$router->get('board', 'BoardController@board');
+$router->get('board-read', 'BoardController@boardRead');
+$router->get('board-write', 'BoardController@boardWrite');
+$router->post('board-write', 'BoardController@boardWrite');
+$router->post('board-writeHandler', 'BoardController@boardWriteHandler');
+$router->post('board-delete', 'BoardController@boardDeletePost');
+
 $router->get('broadcast', 'PagesController@broadcast');
-// 로그인 및 회원가입 루트
+// 로그인 루트
 $router->get('login', 'UserController@login');
+$router->post('login-startSession', 'UserController@login');
+$router->get('logout', 'UserController@logout');
+// 회원가입 루트
 $router->get('register', 'UserController@register');
 $router->post('registerHandler', 'UserController@register');
-
-// 포스트 메소드로 넘어온 정보를 처리하는 루트
-// $router->post('registerHandler', 'PostController@register');
-// $router->post('login-startsession', 'PagesController@home');
