@@ -1,9 +1,14 @@
 <nav class="sign_in">
     <ul>
+        <?php if (isset($_SESSION['userID'])) :  ?>
+        <li><?= $_SESSION['nickName'] ?></li>
+        <li>|</li>
+        <li><a href="/logout">로그아웃</a></li>
+        <?php else : ?>
         <li><a href="/login">로그인</a></li>
         <li><a href="/register">회원가입</a></li>
+        <?php endif ?>
     </ul>
-    <br />
 </nav>
 <div class="logo">
     <a href="/"><img src="/src/image/img.png" alt="logo" /></a>
