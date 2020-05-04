@@ -44,14 +44,13 @@ h1 {
 }
 
 .container p {
-  margin: 0;
+  margin-top: 20px;
   padding: 0;
   font-weight: bold;
 }
 
 .container input {
   width: 100%;
-  margin-bottom: 20px;
 }
 
 .container input[type="text"],
@@ -75,7 +74,8 @@ input[type="passwordCheck"] {
   color: white;
   font-size: 18px;
   border-radius: 20px;
-  margin-top: 20px;
+  margin-top: 40px;
+  margin-bottom: 20px;
 }
 
 .container input[type="submit"]:hover {
@@ -101,9 +101,8 @@ input[type="passwordCheck"] {
   left: calc(50% - 50px);
 }
 
-.container form span {
-  font-size: 12px;
-  display: none;
+.container small {
+  color: red;
 }
 
 #passwordSuccess {
