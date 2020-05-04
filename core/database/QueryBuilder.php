@@ -32,6 +32,7 @@ class QueryBuilder
     // selectTable 메소드를 실행 후 모든 값들을 쿼리하는 메소드 
     public function fetchAllValues($statement, $dataClass)
     {
+
         return $statement->fetchAll(PDO::FETCH_CLASS, $dataClass);
     }
 
@@ -51,6 +52,14 @@ class QueryBuilder
         return $statement->fetchAll(PDO::FETCH_CLASS, $dataClass);
     }
 
+    public function fetchLoginData($tableName, $userID, $password, $dataClass)
+    {
+        $statement = $this->pdo->prepare("select * from {$tableName} where user_id='{$userID}' and password='{$password}'");
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS, $dataClass);
+    }
+
+    // 사용자 key 와 value로 db 검색후 데이터 쿼리하는 메소드
     public function fetchValueByName($tableName, $keyValueData, $dataClass)
     {
         $stringFormat = sprintf(
@@ -95,7 +104,7 @@ class QueryBuilder
     }
 
     // 수정이 필요할 것 같음... 좀 더 활용성 있게;
-    public function updateData($tableName, $requestID, $keyValueData)
+    public function updateHit($tableName, $requestID, $keyValueData)
     {
         $stringFormat = sprintf(
             'update %s set %s = %s where id=%s',
@@ -113,6 +122,31 @@ class QueryBuilder
 
             die('데이터 베이스 관련 에러 발생');
         }
+    }
+
+    public function updateBoardScript($tableName, $requestID, $keyValueData)
+    {
+        $stringFormat = sprintf(
+            'update %s set title=%s, content=%s where id=%s',
+            $tableName,
+            $keyValueData['title'],
+            $keyValueData['content'],
+            $requestID
+        );
+
+        try {
+            $statement = $this->pdo->prepare($stringFormat);
+            $statement->execute();
+        } catch (Exception $th) {
+
+            die('데이터 베이스 관련 에러 발생');
+        }
+    }
+
+    public function deleteByID($tableName, $requestID)
+    {
+        $statement = $this->pdo->prepare("delete from {$tableName} where id = {$requestID}");
+        $statement->execute();
     }
 
     // 페이지의 갯수를 결정하는 메소드
