@@ -32,8 +32,7 @@
 }
 
 .pagination a button {
-  width: 28px;
-  height: 28px;
+  padding: 15px;
   font-weight: 800;
   margin: 3px;
   cursor: pointer;
@@ -46,6 +45,10 @@
 
 .pagination a button:hover {
   transform: translateY(3px);
+}
+
+.pagination a button.active {
+  background-color: darkgrey;
 }
 
 /* 자유계시판 글쓰기 버튼 스타일 */
