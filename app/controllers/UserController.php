@@ -36,7 +36,35 @@ class UserController extends Controller
 
     public function login()
     {
-        $view = $this->createView('login');
-        return $view->loadView();
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $userID = $_POST['userID'];
+            $password = $_POST['password'];
+
+            $model = $this->createModel('UserModel');
+            $userInfo = $model->checkLoginInput($userID, $password);
+
+            // 입력한 회원정보가 db에 존재하지 않다면 error 메세지가 뜬 채로 로그인 view 보여주기
+            if ($userInfo == null) {
+                $viewData = $model->getReturnedData();
+                $view = $this->createView('login',  $viewData);
+                return $view->loadView();
+
+                // 입력한 회원정보가 존재한다면 session start
+            } else {
+                $model->startSession($userInfo);
+                header('Location:/');
+                exit;
+            }
+        } else {
+            $view = $this->createView('login');
+            return $view->loadView();
+        }
+    }
+
+    public function logout()
+    {
+        session_destroy();
+        header('Location:/');
+        exit;
     }
 }
