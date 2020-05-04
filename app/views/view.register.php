@@ -9,9 +9,8 @@
     <!-- 자바 스크립트 코드 불러오기 -->
 
     <script>
-    var userList = ('<?= json_encode($userList) ?>');
+    let userList = ('<?= json_encode($userList) ?>');
     </script>
-
     <script defer src="app/views/javascript/register.js"></script>
 </head>
 
@@ -22,23 +21,24 @@
     <div class=container>
         <h1>회원가입 하기</h1>
 
-        <form id="registerForm" action="/registerHandler" method="POST">
+        <form action="/registerHandler" method="POST">
 
             <p>사용자 아이디</p>
             <input id="userID" oninput="validate(this);" type="text" name="userID" placeholder="이메일 입력">
-            <small id="userIDText"></small>
+            <small id="userIDText">필수 입력란</small>
+
             <p>비밀번호</p>
             <input id="password" oninput="validate(this);" type="password" name="password" placeholder="비밀번호 입력">
-            <small id="passwordText"></small>
+            <small id="passwordText">필수 입력란</small>
 
             <p>비밀번호 확인</p>
             <input id="passwordCheck" oninput="validate(this);" type="password" name="passwordCheck"
                 placeholder="비밀번호 확인">
-            <small id="passwordCheckText"></small>
+            <small id="passwordCheckText">필수 입력란</small>
 
             <p>닉네임</p>
             <input id="nickName" oninput="validate(this);" type="text" name="nickName" placeholder="닉네임">
-            <small id="nickNameText"></small>
+            <small id="nickNameText">필수 입력란</small>
 
             <p>성별</p>
             <select id="sex" name="sex" required>
@@ -61,7 +61,7 @@
             </label>
 
             <input id=submitBtn type="submit" value="회원가입" disabled>
-            <small id="submitBtnText"></small>
+            <small id="submitBtnText">필수 입력란을 확인해주세요</small>
         </form>
     </div>
 
