@@ -5,11 +5,17 @@ namespace app\data;
 class BoardReadData
 {
 
+    private $id;
     private $title;
     private $writer;
     private $date;
     private $hit;
     private $content;
+
+    public function getID()
+    {
+        return $this->id;
+    }
 
     public function getWriter()
     {
