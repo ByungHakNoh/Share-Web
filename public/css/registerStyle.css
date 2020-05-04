@@ -18,7 +18,7 @@ body {
 }
 
 .container {
-  margin-top: 200px;
+  margin-top: 250px;
   margin-bottom: 200px;
   width: 600px;
   height: auto;
@@ -111,6 +111,10 @@ input[type="passwordCheck"] {
   line-height: 20px;
   color: black;
   margin: 25px;
+}
+
+.container form small {
+  color: red;
 }
 
 .container form small.valid {
