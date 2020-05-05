@@ -4,6 +4,8 @@ namespace app\models;
 
 require 'app/data/BoardPostData.php';
 require 'app/data/BoardReadData.php';
+require 'app/data/CommentData.php';
+require 'app/data/BoardReplyData.php';
 
 use core\App;
 use core\mvc\Model;
@@ -21,10 +23,8 @@ class BoardModel extends Model
         $numberOfPage = App::get('database')->paginationPageNum($this->tableName, $resultPerPage);
         $postList = App::get('database')->pagination($this->tableName, $dataClass, $currentPage, $resultPerPage);
 
-        $this->returnedData = [
-            'numberOfPage' => $numberOfPage,
-            'postList' => $postList
-        ];
+        $this->returnedData['numberOfPage'] = $numberOfPage;
+        $this->returnedData['postList'] = $postList;
     }
 
     // 자유게시판 글을 읽는 페이지를 들어갈 때 사용하는 메소드 -> 클릭한 계시글에 관한 글을 데이터베이스에서 가져온다.
@@ -35,30 +35,96 @@ class BoardModel extends Model
 
         $addedHitCount = $postElements[0]->getHit() + 1;
 
-        App::get('database')->updateHit($this->tableName, $requestID, ['hit' =>  $addedHitCount]);
+        App::get('database')->updateByID($this->tableName, $requestID, ['hit' =>  $addedHitCount]);
 
-        $this->returnedData = ['postElements' => $postElements];
+        $this->returnedData['postElements'] = $postElements;
     }
 
     // 자유게시판에 글을 쓸 때 사용하는 메소드로 이미지, 동영상이 있을 시 서버 컴퓨터에 파일 저장 후 데이터 베이스에 저장한다
     public function uploadScript($writer, $title, $content)
     {
         $content = $this->prepareContent($content);
-        $this->saveToDatabase($writer, $title, $content);
+        $this->savePost($writer, $title, $content);
     }
 
     // 게시물 수정하는 메소드로 이미지, 동영상이 있을 시 서버 컴퓨터에 파일 저장 후 데이터 베이스에 저장한다
     public function modifyScript($requestID, $title, $content)
     {
         $content = $this->prepareContent($content);
-        $this->updateToDatabase($requestID, $title, $content);
+        $this->updatePost($requestID, $title, $content);
     }
 
     // 게시물 삭제하기 
     public function deletePost($requestID)
     {
-        App::get('database')->deleteByID('User', $requestID);
+        App::get('database')->deleteByID($this->tableName, $requestID);
     }
+
+    // 댓글 정보 가져오기
+    public function fetchCommentData($postID)
+    {
+        $tableName = 'free_board_comment';
+        $keyValueData = ['post_id' => $postID];
+        $dataClass = 'app\data\CommentData';
+        $comments = App::get('database')->fetchValueByName($tableName, $keyValueData, $dataClass);
+        $this->returnedData['comments'] = $comments;
+    }
+
+    // 댓글 추가하기
+    public function addComment($postID, $writer, $comment)
+    {
+        $this->saveComment($postID, $writer, $comment);
+    }
+
+    // 댓글 수정하기
+    public function modifyComment($modifiedCommentID, $modifiedComment)
+    {
+        $tableName = 'free_board_comment';
+        $keyValueData = ['comment' => "'" . $modifiedComment . "'"];
+        App::get('database')->updateByID($tableName, $modifiedCommentID, $keyValueData);
+    }
+
+    // 댓글 삭제하기
+    public function deleteComment($requestID)
+    {
+        $tableComment = 'free_board_comment';
+        $tableReply = 'free_board_reply';
+        $columnName = 'comment_id';
+        App::get('database')->deleteByID($tableComment, $requestID);
+        App::get('database')->deleteByColumn($tableReply, $columnName, $requestID);
+    }
+
+
+    // 답글 정보 가져오기
+    public function fetchReplyData($commentID)
+    {
+        $tableName = 'free_board_reply';
+        $keyValueData = ['comment_id' => $commentID];
+
+        $dataClass = 'app\data\BoardReplyData';
+        $replies = App::get('database')->fetchValueByName($tableName, $keyValueData, $dataClass);
+        return $replies;
+    }
+
+    public function addReply($commentID, $writer, $reply)
+    {
+        $this->saveReply($commentID, $writer, $reply);
+    }
+
+    public function modifyReply($modifiedReplyID, $modifiedReply)
+    {
+        $tableName = 'free_board_reply';
+        $keyValueData = ['reply' => "'" . $modifiedReply . "'"];
+        App::get('database')->updateByID($tableName, $modifiedReplyID, $keyValueData);
+    }
+
+    public function deleteReply($requestID)
+    {
+        $tableName = 'free_board_reply';
+        App::get('database')->deleteByID($tableName, $requestID);
+    }
+
+
 
     // --- 코드 정리를 위한 메소드 생성 --- 
     private function prepareContent($content)
@@ -72,11 +138,15 @@ class BoardModel extends Model
 //코드 정렬이 맞지 않아 php 열고 닫아줌 -> 추후 수정 요망
 ?>
 <?php
-            $imageTags = $doc->getElementsByTagName('img');
-            $videoTags = $doc->getElementsByTagName('video');
+            if (strpos($content, '<img')) {
+                $imageTags = $doc->getElementsByTagName('img');
+                $this->modifyTagElement($imageTags, 'image');
+            }
 
-            $this->modifyTagElement($imageTags, 'image');
-            $this->modifyTagElement($videoTags, 'video');
+            if (strpos($content, '<video')) {
+                $videoTags = $doc->getElementsByTagName('video');
+                $this->modifyTagElement($videoTags, 'video');
+            }
 
             $content = $doc->saveHTML();
             return $content;
@@ -119,7 +189,7 @@ class BoardModel extends Model
         return base64_decode($base64EncData);
     }
 
-    private function saveToDatabase($wrtier, $title, $content)
+    private function savePost($wrtier, $title, $content)
     {
         $date = date('Y-m-d');
 
@@ -131,11 +201,34 @@ class BoardModel extends Model
         ]);
     }
 
-    private function updateToDatabase($requestID, $title, $content)
+    private function updatePost($requestID, $title, $content)
     {
         App::get('database')->updateBoardScript($this->tableName, $requestID, [
             'title' =>  '"' . $title . '"',
             'content' => "'" . $content . "'"
+        ]);
+    }
+
+    private function saveComment($postID, $writer, $comment)
+    {
+        // 댓글 테이블 이름 따로 입력
+        $tableName = 'free_board_comment';
+
+        App::get('database')->insertData($tableName, [
+            'post_id' =>  $postID,
+            'writer' => '"' . $writer . '"',
+            'comment' => "'" . $comment . "'"
+        ]);
+    }
+
+    private function saveReply($commentID, $writer, $reply)
+    {
+        $tableName = 'free_board_reply';
+
+        App::get('database')->insertData($tableName, [
+            'comment_id' =>  $commentID,
+            'writer' => '"' . $writer . '"',
+            'reply' => "'" . $reply . "'"
         ]);
     }
 }
