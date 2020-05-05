@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use core\mvc\Controller;
+use core\router\RequestURI;
 
 // 사용자의 request를 수신받는다.
 
@@ -33,5 +34,15 @@ class PagesController extends Controller
     {
         $view = $this->createView('broadcast');
         return $view->loadView();
+    }
+
+    public function cookieHandler()
+    {
+
+        if (isset($_POST['notToday'])) {
+            setcookie('notToday', true, time() + 86400);
+        }
+        header("Location:/");
+        exit;
     }
 }
