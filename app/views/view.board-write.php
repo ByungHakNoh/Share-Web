@@ -29,15 +29,14 @@
     <?php require('holder/main/bodyHeadPage.php'); ?>
     <div class="writeContainer">
         <form id="writeForm" method="POST" action="/board-writeHandler">
-            <h4>제목 : <input id="title" type="text" name="title"
-                    value="<?= isset($postElements) ? $postElements[0]->getTitle() : null ?>"></h4>
+            <h3>제목 : <input id="title" type="text" name="title"
+                    value="<?= isset($postElements) ? $postElements[0]->getTitle() : null ?>"></h3>
+
+            <h4>동영상 파일</h4><input id="videoInput" type="file" accept=".mp4">
             <textarea id="summernote" name="content"></textarea>
             <input type="hidden" name="id" value=<?= isset($requestID) ? $requestID : null ?>>
             <input type="submit" value="확인" />
         </form>
-
-        <!-- <button id="uploadVideoBtn">동영상 업로드</button> -->
-        <input id="videoInput" oninput="uploadVideo(this)" type="file">
     </div>
 
 </body>
