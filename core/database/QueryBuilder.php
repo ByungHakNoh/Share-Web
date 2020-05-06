@@ -99,12 +99,11 @@ class QueryBuilder
 
             die('데이터 베이스 관련 에러 발생');
         }
-
         return $stringFormat;
     }
 
     // 수정이 필요할 것 같음... 좀 더 활용성 있게;
-    public function updateHit($tableName, $requestID, $keyValueData)
+    public function updateByID($tableName, $requestID, $keyValueData)
     {
         $stringFormat = sprintf(
             'update %s set %s = %s where id=%s',
@@ -146,6 +145,13 @@ class QueryBuilder
     public function deleteByID($tableName, $requestID)
     {
         $statement = $this->pdo->prepare("delete from {$tableName} where id = {$requestID}");
+        $statement->execute();
+    }
+
+    public function deleteByColumn($tableName, $columnName, $value)
+    {
+
+        $statement = $this->pdo->prepare("delete from {$tableName} where {$columnName} = {$value}");
         $statement->execute();
     }
 
