@@ -21,3 +21,37 @@
   font-weight: 700;
   box-shadow: 5px 5px 5px gainsboro;
 }
+
+.cookieContainer {
+  height: 80px;
+  position: relative;
+  top: -30px;
+  margin-left: 400px;
+  margin-right: 400px;
+  background-color: #2f3640;
+  color: #f5f6fa;
+  padding: 20px;
+  transition: 400ms;
+}
+
+.btnContainer {
+  margin-top: 20px;
+  width: 100%;
+}
+
+.btnContainer input {
+  float: right;
+  background-color: #e84118;
+  border: 0;
+  color: #f5f6fa;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-right: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.btnContainer input:hover {
+  background-color: yellowgreen;
+}
