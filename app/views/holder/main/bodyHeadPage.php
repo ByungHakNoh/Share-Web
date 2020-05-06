@@ -19,7 +19,7 @@
         <li><a href="/">홈</a></li>
         <li><a href="/news">패션 소식</a></li>
         <li><a href="/information">패션 정보</a></li>
-        <li><a href="/board">자유 계시판</a></li>
+        <li><a href="/board">자유 게시판</a></li>
         <li><a href="/broadcast">방송하기</a></li>
     </ul>
 </nav>
