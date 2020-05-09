@@ -1,4 +1,7 @@
 <?php
+// 에러 로그 출력하는 코드
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 use core\router\{Router, RequestURI};
 
