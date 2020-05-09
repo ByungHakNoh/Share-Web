@@ -2,8 +2,6 @@
 
 // 메인 홈페이지 : 상단 네비게이션 바로 이동 하는 루트
 
-use app\controllers\PagesController;
-
 $router->get('', 'PagesController@home');
 $router->get('news', 'PagesController@news');
 $router->get('information', 'PagesController@information');
@@ -27,5 +25,8 @@ $router->get('logout', 'UserController@logout');
 // 회원가입 루트
 $router->get('register', 'UserController@register');
 $router->post('registerHandler', 'UserController@register');
+
+// 관리자 페이지
+$router->get('adminPage', 'UserController@adminPage');
 
 $router->post('cookie-handler', 'PagesController@cookieHandler');
