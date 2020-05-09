@@ -67,4 +67,14 @@ class UserController extends Controller
         header('Location:/');
         exit;
     }
+
+    public function adminPage()
+    {
+        $model = $this->createModel('UserModel');
+        $model->fetchAdminData();
+
+        $viewData = $model->getReturnedData();
+        $view = $this->createView('admin', $viewData);
+        return $view->loadView();
+    }
 }
