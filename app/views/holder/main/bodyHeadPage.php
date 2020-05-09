@@ -1,12 +1,19 @@
 <nav class="sign_in">
     <ul>
+        <!-- 로그인을 했다면 -->
         <?php if (isset($_SESSION['userID'])) :  ?>
-        <li><?= $_SESSION['nickName'] ?></li>
-        <li>|</li>
-        <li><a href="/logout">로그아웃</a></li>
+            <li><?= $_SESSION['nickName'] ?></li>
+            <li>|</li>
+            <li><a href="/logout">로그아웃</a></li>
+            <!-- 관리자 아이디로 로그인 했다면 -->
+            <?php if ($_SESSION['admin'] == 1) : ?>
+                <li>|</li>
+                <li><a href="/adminPage">관리자페이지</a></li>
+            <?php endif ?>
+            <!-- 로그인을 하지 않았다면 -->
         <?php else : ?>
-        <li><a href="/login">로그인</a></li>
-        <li><a href="/register">회원가입</a></li>
+            <li><a href="/login">로그인</a></li>
+            <li><a href="/register">회원가입</a></li>
         <?php endif ?>
     </ul>
 </nav>
