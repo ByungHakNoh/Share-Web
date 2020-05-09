@@ -8,6 +8,7 @@ class UserInfo
     private $password;
     private $nick_name;
     private $sex;
+    private $admin;
 
     public function getUserID()
     {
@@ -27,5 +28,10 @@ class UserInfo
     public function getSex()
     {
         return $this->sex;
+    }
+
+    public function getIsAdmin()
+    {
+        return $this->admin;
     }
 }
