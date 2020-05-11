@@ -70,11 +70,18 @@ class UserController extends Controller
 
     public function adminPage()
     {
-        $model = $this->createModel('UserModel');
-        $model->fetchAdminData();
+        if (isset($_SESSION['admin'])) {
+            if ($_SESSION['admin']) {
+                $model = $this->createModel('UserModel');
+                $model->fetchAdminData();
 
-        $viewData = $model->getReturnedData();
-        $view = $this->createView('admin', $viewData);
-        return $view->loadView();
+                $viewData = $model->getReturnedData();
+                $view = $this->createView('admin', $viewData);
+                return $view->loadView();
+            }
+        } else {
+            header('Location:/');
+            exit;
+        }
     }
 }
