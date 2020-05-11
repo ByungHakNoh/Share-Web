@@ -45,10 +45,41 @@ class PagesController extends Controller
     }
 
     // 브랜드 선호도 페이지
-    public function information()
+    public function brand()
     {
-        $view = $this->createView('information');
-        return $view->loadView();
+        $model = $this->createModel('PagesModel');
+
+        if (isset($_POST['start'])) {
+            $startNumber = $_POST['start'];
+            $limitNumber = $_POST['limit'];
+
+            $model->getBrandDataByID($startNumber, $limitNumber);
+            $brandData = $model->getReturnedData();
+            exit(json_encode($brandData));
+        } else if (isset($_POST['id'])) {
+
+            $brandID = $_POST['id'];
+            $nickName = $_POST['nickName'];
+            $rateNumber = $_POST['rateNumber'];
+            $totalVotes = $_POST['totalVotes'];
+            $averageRate = $_POST['averageRate'];
+
+            $model->uploadBrandRating($brandID, $nickName, $rateNumber);
+            $response = $model->uploadBrand($brandID, $totalVotes, $averageRate, $rateNumber);
+            exit($response);
+        } else {
+            $viewData = [];
+
+            if (isset($_SESSION['nickName'])) {
+
+                $nickName = $_SESSION['nickName'];
+                $model->getbrandRatingData($nickName);
+                $viewData = $model->getReturnedData();
+            }
+
+            $view = $this->createView('brand', $viewData);
+            return $view->loadView();
+        }
     }
 
     // 방송 보기 페이지
