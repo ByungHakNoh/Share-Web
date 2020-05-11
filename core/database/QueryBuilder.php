@@ -44,6 +44,13 @@ class QueryBuilder
         return $statement->fetchAll(PDO::FETCH_CLASS, $dataClass);
     }
 
+    public function fetchLimitedArray($table, $columnName, $order, $startNumber, $endNumber)
+    {
+        $statement = $this->pdo->prepare("select * from {$table} order by {$columnName} {$order} limit {$startNumber}, {$endNumber}");
+        $statement->execute();
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
     // 특정 id 값을 선택하여 쿼리하는 메소드
     public function fetchValueByID($table, $requestID, $dataClass)
     {
@@ -81,6 +88,27 @@ class QueryBuilder
         return $statement->fetchAll(PDO::FETCH_CLASS, $dataClass);
     }
 
+    public function fetchArrayByName($tableName, $keyValueData)
+    {
+        $stringFormat = sprintf(
+            'select * from %s where %s=%s',
+            $tableName,
+            implode(', ', array_keys($keyValueData)),
+            implode(', ', array_values($keyValueData))
+        );
+
+        try {
+
+            $statement = $this->pdo->prepare($stringFormat);
+            $statement->execute();
+        } catch (Exception $th) {
+
+            die('데이터 베이스 관련 에러 발생');
+        }
+
+        return $statement->fetchAll(PDO::FETCH_CLASS);
+    }
+
     // 테이블에 데이터를 저장하는 메소드
     public function insertData(String $table, $keyValueData)
     {
@@ -114,6 +142,25 @@ class QueryBuilder
 
         try {
 
+            $statement = $this->pdo->prepare($stringFormat);
+            $statement->execute();
+        } catch (Exception $th) {
+
+            die('데이터 베이스 관련 에러 발생');
+        }
+    }
+
+    public function updateBrand($tableName, $requestID, $keyValueData)
+    {
+        $stringFormat = sprintf(
+            'update %s set average_rate=%s, total_votes=%s where id=%s',
+            $tableName,
+            $keyValueData['averageRate'],
+            $keyValueData['totalVotes'],
+            $requestID
+        );
+
+        try {
             $statement = $this->pdo->prepare($stringFormat);
             $statement->execute();
         } catch (Exception $th) {
