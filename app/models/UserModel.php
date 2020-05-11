@@ -8,8 +8,6 @@ require 'app/data/AdminData.php';
 use core\App;
 use core\mvc\Model;
 
-use function PHPSTORM_META\type;
-
 class UserModel extends Model
 {
     // 회원가입 성공 시 데이터베이스에 회원 정보 저장하는 메소드
