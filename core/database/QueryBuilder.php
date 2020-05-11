@@ -37,9 +37,9 @@ class QueryBuilder
     }
 
     // 제한된 개수만을 쿼리하는 메소드
-    public function fetchLimitedValues($table, $startNumber, $endNumber, $dataClass)
+    public function fetchLimitedValues($table, $columnName, $order, $startNumber, $endNumber, $dataClass)
     {
-        $statement = $this->pdo->prepare("select * from {$table} order by id desc limit {$startNumber}, {$endNumber}");
+        $statement = $this->pdo->prepare("select * from {$table} order by {$columnName} {$order} limit {$startNumber}, {$endNumber}");
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_CLASS, $dataClass);
     }
@@ -92,7 +92,6 @@ class QueryBuilder
         );
 
         try {
-
             $statement = $this->pdo->prepare($stringFormat);
             $statement->execute($keyValueData);
         } catch (Exception $th) {
@@ -170,6 +169,6 @@ class QueryBuilder
         // 데이터 저장소에서 계시판 정보 불러와야함
         $startNumber = ($currentPage - 1) * $valuesPerPage;
 
-        return $this->fetchLimitedValues($tableName, $startNumber, $valuesPerPage, $dataClass);
+        return $this->fetchLimitedValues($tableName, 'id', 'desc', $startNumber, $valuesPerPage, $dataClass);
     }
 }
