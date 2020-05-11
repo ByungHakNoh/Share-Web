@@ -1,0 +1,95 @@
+.bestBrandContainer {
+  width: auto;
+  margin-left: 200px;
+  margin-right: 200px;
+  height: 300px;
+}
+
+.recentBrandContainer {
+  margin-left: 400px;
+  margin-right: 400px;
+  width: auto;
+  text-align: center;
+}
+
+.recentBrandContainer figure {
+  margin: 20px;
+  display: inline-block;
+  width: 500px;
+  height: 450px;
+  background-color: white;
+}
+
+.recentBrandContainer figure img {
+  width: 300px;
+  height: 300px;
+}
+
+.recentBrandContainer figure i {
+  margin-top: 30px;
+  font-size: 40px;
+}
+
+.recentBrandContainer figure figcaption {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.recentBrandContainer figure button {
+  position: relative;
+  top: -8px;
+  margin-left: 20px;
+  border: 0;
+  background: rgb(38, 146, 71);
+  border-radius: 4px;
+  box-shadow: 0 5px 0 rgb(38, 146, 71);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+  padding: 10px 12px;
+  transition: all 0.05s linear;
+  font-weight: 900;
+}
+
+.recentBrandContainer figure button:disabled {
+  background: red;
+  box-shadow: 0 5px 0 red;
+}
+
+.highRatedContainer {
+  width: auto;
+}
+
+footer {
+  width: 100%;
+  background-color: black;
+}
+
+/* .tabBtnContainer {
+  margin-top: 50px;
+  margin-left: 100px;
+}
+
+.tabBtnContainer button {
+  float: left;
+  margin-right: 15px;
+  min-width: 100px;
+  height: 100%;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  background-color: #eee;
+}
+
+.tabBtnContainer button:hover {
+  background-color: #d7d4d4;
+}
+
+.tabBtnContainer button.active {
+  background-color: #d7d4d4;
+} */
