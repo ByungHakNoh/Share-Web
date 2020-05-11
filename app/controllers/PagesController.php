@@ -11,6 +11,7 @@ use core\mvc\Controller;
 // 받아온 데이터를 view에 넣고 view 객체를 생성한다.
 class PagesController extends Controller
 {
+    // 홈페이지
     public function home()
     {
         // 처음 방문한 경우 하루 동안 쿠키 저장
@@ -23,28 +24,41 @@ class PagesController extends Controller
             $model = $this->createModel('UserModel');
             $model->uploadAdminData($ip, $userAgent);
         }
-        $view = $this->createView('home');
+
+        $startNumber = 0;
+        $endNumber = 9;
+
+        $model = $this->createModel('BoardModel');
+        $model->fetchDataByID($startNumber, $endNumber, 'desc');
+        $model->fetchDataByHit($startNumber, $endNumber, 'desc');
+
+        $viewData = $model->getReturnedData();
+        $view = $this->createView('home', $viewData);
         return $view->loadView();
     }
 
-    public function information()
-    {
-        $view = $this->createView('information');
-        return $view->loadView();
-    }
-
+    // 패션 뉴스 크롤링 페이지
     public function news()
     {
         $view = $this->createView('news');
         return $view->loadView();
     }
 
+    // 브랜드 선호도 페이지
+    public function information()
+    {
+        $view = $this->createView('information');
+        return $view->loadView();
+    }
+
+    // 방송 보기 페이지
     public function broadcast()
     {
         $view = $this->createView('broadcast');
         return $view->loadView();
     }
 
+    // 쿠키 관련 post 메소드 처리하는 페이지
     public function cookieHandler()
     {
 
