@@ -7,19 +7,15 @@
 
 .homeMainBoard div {
   display: inline-block;
+  /* 지우자~ */
   width: 1000px;
-  height: 400px;
-  margin-top: 50px;
-  margin-bottom: 20px;
-  padding: 10px;
+  padding: 30px;
   text-align: center;
-  border: 3px;
-  border-style: solid;
-  border-color: white;
+  /* border: 3px;
+  border-style: solid; */
+  /* border-color: white;
   background-color: white;
-  font-size: 20px;
-  font-weight: 700;
-  box-shadow: 5px 5px 5px gainsboro;
+  box-shadow: 5px 5px 5px gainsboro; */
 }
 
 .cookieContainer {
@@ -35,8 +31,8 @@
 }
 
 .btnContainer {
-  margin-top: 20px;
   width: 100%;
+  margin-bottom: 150px;
 }
 
 .btnContainer input {
@@ -54,4 +50,66 @@
 
 .btnContainer input:hover {
   background-color: yellowgreen;
+}
+
+.boardContainer {
+  height: auto;
+  width: auto;
+  text-align: center;
+  margin-top: 50px;
+  margin-bottom: 150px;
+  padding: 10px;
+  border: 3px;
+  border-style: solid;
+  border-color: white;
+  background-color: white;
+  box-shadow: 5px 5px 5px gainsboro;
+}
+
+#moreInfo {
+  float: right;
+}
+
+.boardContainer table {
+  padding: 20px;
+  display: inline-block;
+}
+
+.boardContainer thead th {
+  height: 40px;
+  border-top: 2px solid rgb(145, 165, 145);
+  border-bottom: 1px solid #ccc;
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.boardContainer tbody td {
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #ccc;
+  height: 20px;
+  font-size: 14px;
+}
+
+.tapBtnContainer button {
+  float: left;
+  margin-right: 15px;
+  min-width: 100px;
+  height: 100%;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: 800;
+  background-color: #eee;
+}
+
+.tapBtnContainer button:hover {
+  background-color: #d7d4d4;
+}
+
+.tapBtnContainer button.active {
+  background-color: #d7d4d4;
 }
