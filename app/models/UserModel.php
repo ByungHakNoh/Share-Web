@@ -27,8 +27,6 @@ class UserModel extends Model
     // 회원가입 시 중복 체크를 하기 위해 사용자 정보를 db로부터 가져오는 메소드
     public function fetchAllUser()
     {
-        $userID = 'forsythia01@gmail.com';
-
         $tableName = 'user';
 
         $statement = App::get('database')->selectTable($tableName);
@@ -83,15 +81,28 @@ class UserModel extends Model
 
     public function fetchAdminData()
     {
-        $tableName = 'admin';
-        $dataClass  = 'app\data\AdminData';
-        $statement = App::get('database')->selectTable($tableName);
-        $adminDataBundle = App::get('database')->fetchAllValues($statement, $dataClass);
+        $adminTable = 'admin';
+        $userTable = 'user';
+        $adminDataClass  = 'app\data\AdminData';
+        $userDataClass = 'app\data\UserInfo';
+
+        $adminStatement = App::get('database')->selectTable($adminTable);
+        $userStatement = App::get('database')->selectTable($userTable);
+
+        $adminDataBundle = App::get('database')->fetchAllValues($adminStatement, $adminDataClass);
+        $userList = App::get('database')->fetchAllValues($userStatement, $userDataClass);
 
         $visitorCountries = $this->getVisitorCountries($adminDataBundle);
         $monthlyVisitor = $this->getMonthlyVisior($adminDataBundle);
-        $this->returnedData['visitorCountries'] = $visitorCountries;
-        $this->returnedData['monthlyVisitor'] = $monthlyVisitor;
+        $visitorBrowser = $this->getVisitorBrowser($adminDataBundle);
+        $memberSexRatio = $this->getMemberSexRatio($userList);
+
+        $this->returnedData = [
+            'visitorCountries' => $visitorCountries,
+            'monthlyVisitor' => $monthlyVisitor,
+            'visitorBrowser' => $visitorBrowser,
+            'memberSexRatio' => $memberSexRatio
+        ];
     }
 
     // ip 정보를 국가 정보로 변환하는 메소드
@@ -163,17 +174,55 @@ class UserModel extends Model
 
         // 1~12월까지의 key 값 생성, value는 모두 0
         for ($month = 1; $month < 13; $month++) {
-            $monthlyVisitor[$month] = 0;
+            $monthlyVisitor[$month . '월'] = 0;
         }
 
         // 월별 사용자들을 분리해서 mothlyVisitor에 저장
         foreach ($adminDataBundle as $adminData) {
             $timeStamp = $adminData->getTimeStamp();
             $month = date('n', strtotime($timeStamp));
-            $monthlyVisitor[$month] = $monthlyVisitor[$month] + 1;
+            $monthlyVisitor[$month . '월'] = $monthlyVisitor[$month . '월'] + 1;
         }
 
         $chartDataForm =  $this->convertToChartData($monthlyVisitor, 'month', 'visitor');
+        return $chartDataForm;
+    }
+
+    private function getVisitorBrowser($adminDataBundle)
+    {
+        $visitorBrowser = array();
+
+        foreach ($adminDataBundle as $adminData) {
+            $browser = $adminData->getBrowser();
+            if (array_key_exists($browser, $visitorBrowser)) {
+
+                $visitorBrowser[$browser] = $visitorBrowser[$browser] + 1;
+            } else {
+
+                $visitorBrowser[$browser] = 1;
+            }
+        }
+
+        $chartDataForm = $this->convertToChartData($visitorBrowser, 'browser', 'visitor');
+        return $chartDataForm;
+    }
+
+    private function getMemberSexRatio($userList)
+    {
+        $memberSexRatio = array();
+
+        foreach ($userList as $user) {
+            $memberSex = $user->getSex();
+            if (array_key_exists($memberSex, $memberSexRatio)) {
+
+                $memberSexRatio[$memberSex] = $memberSexRatio[$memberSex] + 1;
+            } else {
+
+                $memberSexRatio[$memberSex] = 1;
+            }
+        }
+
+        $chartDataForm = $this->convertToChartData($memberSexRatio, '성별', '회원 수');
         return $chartDataForm;
     }
 
