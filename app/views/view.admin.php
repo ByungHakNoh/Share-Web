@@ -9,22 +9,28 @@
     <script>
         let visitorCountries = '<?= json_encode($visitorCountries); ?>'
         let monthlyVisitor = '<?= json_encode($monthlyVisitor); ?>'
+        let visitorBrowser = '<?= json_encode($visitorBrowser); ?>'
+        let memberSexRatio = '<?= json_encode($memberSexRatio); ?>'
     </script>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script defer src="app/views/javascript/admin.js"></script>
 </head>
 
 <body>
-    <?php require('holder/main/bodyHeadPage.php'); ?>
+    <?php require('holder/main/bodyHeadPage.php') ?>
     <div class="adminTabContainer">
         <div class="tapBtnContainer">
             <button onclick="panelController(0)">전체</button>
             <button onclick="panelController(1)">나라별 방문자</button>
             <button onclick="panelController(2)">월별 방문자</button>
+            <button onclick="panelController(3)">브라우저별 방문자</button>
+            <button onclick="panelController(4)">회원 성비</button>
         </div>
 
         <div class="adminTabPannel" id="visitorByCountry" style="width: 900px; height: 500px;"></div>
         <div class="adminTabPannel" id="monthlyVisitor" style="width: 900px; height: 500px;"></div>
+        <div class="adminTabPannel" id="browser" style="width: 900px; height: 500px;"></div>
+        <div class="adminTabPannel" id="sexRatio" style="width: 900px; height: 500px;"></div>
     </div>
 </body>
 
