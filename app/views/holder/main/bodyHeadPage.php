@@ -5,6 +5,8 @@
             <li><?= $_SESSION['nickName'] ?></li>
             <li>|</li>
             <li><a href="/logout">로그아웃</a></li>
+            <li>|</li>
+            <li><a href="/broadcast">방송하기</a></li>
             <!-- 관리자 아이디로 로그인 했다면 -->
             <?php if ($_SESSION['admin'] == 1) : ?>
                 <li>|</li>
@@ -25,7 +27,7 @@
     <ul>
         <li><a href="/">홈</a></li>
         <li><a href="/news">패션 소식</a></li>
-        <li><a href="/information">브랜드 선호도</a></li>
+        <li><a href="/brand">브랜드</a></li>
         <li><a href="/board">자유 게시판</a></li>
         <li><a href="/broadcast">방송하기</a></li>
     </ul>
