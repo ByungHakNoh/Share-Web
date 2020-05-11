@@ -4,7 +4,8 @@
 
 $router->get('', 'PagesController@home');
 $router->get('news', 'PagesController@news');
-$router->get('information', 'PagesController@information');
+$router->get('brand', 'PagesController@brand');
+$router->post('brand', 'PagesController@brand');
 // 자유계시판 관련 루트
 $router->get('board', 'BoardController@board');
 $router->get('board-read', 'BoardController@boardRead');
