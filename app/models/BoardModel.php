@@ -15,6 +15,22 @@ class BoardModel extends Model
 {
     private $tableName = 'free_board';
 
+    public function fetchDataByID($startNumber, $endNumber, $order)
+    {
+        $dataClass = 'app\data\BoardPostData';
+        $columnName = 'id';
+        $postList = App::get('database')->fetchLimitedValues($this->tableName, $columnName, $order, $startNumber, $endNumber, $dataClass);
+        $this->returnedData['postListByID'] = $postList;
+    }
+
+    public function fetchDataByHit($startNumber, $endNumber, $order)
+    {
+        $dataClass = 'app\data\BoardPostData';
+        $columnName = 'hit';
+        $postList = App::get('database')->fetchLimitedValues($this->tableName, $columnName, $order, $startNumber, $endNumber, $dataClass);
+        $this->returnedData['postListByHit'] = $postList;
+    }
+
     // 자유게시판 목록을 보여주는 메소드
     public function fetchPostData($currentPage, $resultPerPage)
     {
@@ -135,7 +151,7 @@ class BoardModel extends Model
             $doc = new DOMDocument();
             libxml_use_internal_errors(true);
             $doc->loadHTML('<?xml encoding="utf-"?>' . $content);
-//코드 정렬이 맞지 않아 php 열고 닫아줌 -> 추후 수정 요망
+            //코드 정렬이 맞지 않아 php 열고 닫아줌 -> 추후 수정 요망
 ?>
 <?php
             if (strpos($content, '<img')) {
@@ -147,9 +163,7 @@ class BoardModel extends Model
                 $videoTags = $doc->getElementsByTagName('video');
                 $this->modifyTagElement($videoTags, 'video');
             }
-
             $content = $doc->saveHTML();
-            return $content;
         }
         return $content;
     }
@@ -171,7 +185,7 @@ class BoardModel extends Model
 
             // 이미지 서버 컴퓨터에 저장하기
             file_put_contents($file, $img);
-            $url = 'http://192.168.56.1/' . $file;
+            $url = 'https://share-fashion.ga/' . $file;
 
             $tag->setAttribute('src', $url);
             $tag->setAttribute('data-original-filename', $tag->getAttribute('data-filename'));
