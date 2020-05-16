@@ -107,8 +107,7 @@ function getData() {
                   averageRate: brand.average_rate,
                 },
                 success: function (response) {
-                  console.log(response);
-                  averageRate.innerHTML = "평균 평점 : " + response;
+                  averageRate.innerHTML = "평균 평점 : " + response.toFixed(2);
                   submitBtn.innerHTML = "완료";
                   submitBtn.disabled = true;
                 },
