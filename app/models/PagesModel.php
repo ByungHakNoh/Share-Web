@@ -27,6 +27,18 @@ class PagesModel extends Model
         $this->returnedData['ratingRecord'] = $ratingRecord;
     }
 
+    public function getBestBrand()
+    {
+        $table = 'brand';
+        $columnName  = 'average_rate';
+        $order = 'desc';
+        $startNumber = 0;
+        $limitNumber = 3;
+        $dataClass = 'app\data\BrandData';
+        $bestBrands = App::get('database')->fetchLimitedValues($table, $columnName, $order, $startNumber, $limitNumber, $dataClass);
+        $this->returnedData['bestBrands'] = $bestBrands;
+    }
+
     public function uploadBrandRating($brandID, $nickName, $rateNumber)
     {
         $table = 'brand_rating';
