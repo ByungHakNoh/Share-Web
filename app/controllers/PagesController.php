@@ -50,6 +50,7 @@ class PagesController extends Controller
         $model = $this->createModel('PagesModel');
 
         if (isset($_POST['start'])) {
+
             $startNumber = $_POST['start'];
             $limitNumber = $_POST['limit'];
 
@@ -66,17 +67,18 @@ class PagesController extends Controller
 
             $model->uploadBrandRating($brandID, $nickName, $rateNumber);
             $response = $model->uploadBrand($brandID, $totalVotes, $averageRate, $rateNumber);
-            exit($response);
+            exit(json_encode($response));
         } else {
+
             $viewData = [];
 
             if (isset($_SESSION['nickName'])) {
 
                 $nickName = $_SESSION['nickName'];
                 $model->getbrandRatingData($nickName);
-                $viewData = $model->getReturnedData();
             }
-
+            $model->getBestBrand();
+            $viewData = $model->getReturnedData();
             $view = $this->createView('brand', $viewData);
             return $view->loadView();
         }
