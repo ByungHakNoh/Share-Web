@@ -1,9 +1,48 @@
 .broadcastContainer {
+  /* display: inline-block; */
+  float: left;
+  width: 1200px;
+  height: 800px;
   margin-bottom: 150px;
+  /* background-color: black; */
 }
 
 #player {
-  margin-left: 100px;
-  width: 1200px;
+  margin-left: 200px;
+  width: 1100px;
   height: 800px;
+}
+
+#messageContainer {
+  float: right;
+  margin-right: 200px;
+  width: 400px;
+  height: 700px;
+  background-color: white;
+}
+
+.messageForm {
+  margin-top: 10px;
+  float: right;
+  margin-right: 200px;
+}
+
+.messageForm input[type="text"] {
+  width: 300px;
+  height: 50px;
+}
+
+.messageForm button {
+  margin-left: 5px;
+  border: 0;
+  background: rgb(38, 146, 71);
+  border-radius: 4px;
+  box-shadow: 0 5px 0 rgb(38, 146, 71);
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  outline: none;
+  padding: 10px 12px;
+  transition: all 0.05s linear;
+  font-weight: 900;
 }
