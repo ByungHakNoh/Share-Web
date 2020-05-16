@@ -5,6 +5,7 @@ namespace app\data;
 class BrandData
 {
     private $id;
+    private $image;
     private $name;
     private $link;
     private $average_rate;
@@ -18,6 +19,11 @@ class BrandData
     public function getName()
     {
         return $this->name;
+    }
+
+    public function getImage()
+    {
+        return $this->image;
     }
 
     public function getLink()
