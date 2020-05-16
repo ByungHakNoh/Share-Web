@@ -34,9 +34,6 @@
             패션 소식
         </div>
 
-        <div class="M">
-            패션 정보
-        </div>
 
         <div class="boardContainer">
             <h3>자유 계시판</h3>
