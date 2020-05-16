@@ -1,13 +1,38 @@
 .bestBrandContainer {
   width: auto;
-  margin-left: 200px;
-  margin-right: 200px;
+  height: auto;
+  margin-left: 400px;
+  margin-right: 400px;
   height: 300px;
+  padding: 20px;
+  background-color: white;
+  text-align: center;
+}
+.bestBrandContainer h1 {
+  margin-bottom: 10px;
+}
+
+.bestBrandContainer figure {
+  width: 250px;
+  margin: 20px;
+  display: inline-block;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.bestBrandContainer figure img {
+  width: 250px;
+  height: 250px;
 }
 
 .recentBrandContainer {
+  margin-top: 150px;
   margin-left: 400px;
   margin-right: 400px;
+  margin-bottom: 150px;
   width: auto;
   text-align: center;
 }
@@ -16,7 +41,9 @@
   margin: 20px;
   display: inline-block;
   width: 500px;
-  height: 450px;
+  height: auto;
+  padding-top: 10px;
+  padding-bottom: 10px;
   background-color: white;
 }
 
@@ -63,7 +90,7 @@
 
 footer {
   width: 100%;
-  background-color: black;
+  height: 150px;
 }
 
 /* .tabBtnContainer {
