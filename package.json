@@ -1,0 +1,25 @@
+{
+  "name": "html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.php",
+  "scripts": {
+    "devStart": "nodemon app/node/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ByungHakNoh/Share-Web.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ByungHakNoh/Share-Web/issues"
+  },
+  "homepage": "https://github.com/ByungHakNoh/Share-Web#readme",
+  "dependencies": {
+    "socket.io": "^2.3.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
