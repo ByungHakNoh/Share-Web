@@ -7,11 +7,10 @@
     <title>Share - board</title>
     <?php require('holder/main/linkCss.php'); ?>
     <link rel="stylesheet" href="public/css/mainBoardStyle.css?after">
-
-    <script>
-    let isLogin = ("<?= isset($_SESSION['userID']) ?>");
-    </script>
     <script defer src="app/views/javascript/board.js"></script>
+    <script>
+        let isLogin = "<?= isset($_SESSION['userID']) ?>"
+    </script>
 </head>
 
 <body>
@@ -32,16 +31,16 @@
             </thead>
 
             <?php foreach ($postList as $post) : ?>
-            <tbody>
-                <tr>
-                    <td width="70"><?= $post->getID(); ?></td>
-                    <td width="700"><a href=<?= '/board-read?id=' . $post->getID(); ?>><?= $post->getTitle(); ?></a>
-                    </td>
-                    <td width="150"><?= $post->getWriter(); ?></td>
-                    <td width="120"><?= $post->getDate(); ?></td>
-                    <td width="100"><?= $post->getHit(); ?></td>
-                </tr>
-            </tbody>
+                <tbody>
+                    <tr>
+                        <td width="70"><?= $post->getID(); ?></td>
+                        <td width="700"><a href=<?= '/board-read?id=' . $post->getID(); ?>><?= $post->getTitle(); ?></a>
+                        </td>
+                        <td width="150"><?= $post->getWriter(); ?></td>
+                        <td width="120"><?= $post->getDate(); ?></td>
+                        <td width="100"><?= $post->getHit(); ?></td>
+                    </tr>
+                </tbody>
             <?php endforeach; ?>
         </table>
 
@@ -49,23 +48,23 @@
 
             <!-- 이전 버튼 생성 -->
             <?php if ($currentPage > 1) : ?>
-            <a href=<?= '/board?page=' . ($currentPage - 1) ?>><button id="previousBtn">이전</button></a>
+                <a href=<?= '/board?page=' . ($currentPage - 1) ?>><button id="previousBtn">이전</button></a>
             <?php endif; ?>
 
             <!-- 페이징 버튼 생성 -->
             <?php for ($page = 1; $page <= $numberOfPage; $page++) { ?>
 
-            <?php if ($currentPage == $page) : ?>
-            <a href=<?= "/board?page={$page}" ?>><button class="active"><?= $page ?></button></a>
-            <?php else : ?>
-            <a href=<?= "/board?page={$page}" ?>><button><?= $page ?></button></a>
-            <?php endif; ?>
+                <?php if ($currentPage == $page) : ?>
+                    <a href=<?= "/board?page={$page}" ?>><button class="active"><?= $page ?></button></a>
+                <?php else : ?>
+                    <a href=<?= "/board?page={$page}" ?>><button><?= $page ?></button></a>
+                <?php endif; ?>
 
             <?php } ?>
 
             <!-- 다음 버튼 생성 -->
             <?php if ($currentPage < $numberOfPage) : ?>
-            <a href=<?= '/board?page=' . ($currentPage + 1) ?>><button id="nextBtn">다음</button></a>
+                <a href=<?= '/board?page=' . ($currentPage + 1) ?>><button id="nextBtn">다음</button></a>
             <?php endif; ?>
         </div>
 
