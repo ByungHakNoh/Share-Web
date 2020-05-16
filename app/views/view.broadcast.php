@@ -9,27 +9,27 @@
     <link rel="stylesheet" href="public/css/broadcastStyle.css?after">
     <link href="https://vjs.zencdn.net/7.1/video-js.min.css" rel="stylesheet">
     <script src="https://vjs.zencdn.net/7.1/video.min.js"></script>
+    <script defer src="app/views/javascript/broadcast.js"></script>
+    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="app/node/script.js"></script>
 </head>
 
 <body>
 
     <?php require('holder/main/bodyHeadPage.php'); ?>
     <div class="broadcastContainer">
-        <h1>... 의 방송입니다</h1>
         <video id="player" class="video-js vjs-default-skin" controls>
             <source src="https://share-fashion.ga/src/video/hls/test.m3u8" type="application/x-mpegURL" />
         </video>
     </div>
-    <script>
-        let options, video;
 
-        options = {
-            autoplay: true,
-            muted: true
-        };
+    <div id="messageContainer">
+    </div>
+    <form class="messageForm" id="messageForm" action="">
+        <input type="text" id="messageInput">
+        <button type="submit" id="sendBtn">보내기</button>
+    </form>
 
-        video = videojs('player', options);
-    </script>
 </body>
 
 </html>
