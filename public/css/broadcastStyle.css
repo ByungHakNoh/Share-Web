@@ -13,12 +13,34 @@
   height: 800px;
 }
 
-#messageContainer {
+.messageContainer {
   float: right;
   margin-right: 200px;
   width: 400px;
   height: 700px;
   background-color: white;
+  padding: 10px;
+}
+
+.messageContainer div {
+  margin-top: 5px;
+}
+
+.messageContainer div small {
+  font-weight: 800;
+  display: inline-block;
+}
+
+.messageContainer main {
+  display: inline-block;
+  margin-top: 5px;
+  background-color: grey;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+.messageContainer main p {
+  font-weight: 530;
 }
 
 .messageForm {
