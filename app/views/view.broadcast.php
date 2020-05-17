@@ -10,8 +10,11 @@
     <link href="https://vjs.zencdn.net/7.1/video-js.min.css" rel="stylesheet">
     <script src="https://vjs.zencdn.net/7.1/video.min.js"></script>
     <script defer src="app/views/javascript/broadcast.js"></script>
-    <script defer src="http://localhost:3000/socket.io/socket.io.js"></script>
+    <script defer src="https://13.125.99.215:3000/socket.io/socket.io.js"></script>
     <script defer src="app/node/script.js"></script>
+    <script>
+        const userNickName = "<?= isset($_SESSION['nickName']) ? $_SESSION['nickName'] : null ?>"
+    </script>
 </head>
 
 <body>
@@ -23,9 +26,9 @@
         </video>
     </div>
 
-    <div id="messageContainer">
+    <div id="messageContainer" class="messageContainer">
     </div>
-    <form class="messageForm" id="messageForm" action="">
+    <form class="messageForm" id="messageForm">
         <input type="text" id="messageInput">
         <button type="submit" id="sendBtn">보내기</button>
     </form>
