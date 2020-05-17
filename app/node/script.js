@@ -1,4 +1,4 @@
-const socket = io.connect("http://192.168.56.1:3000");
+const socket = io.connect("https://13.125.99.215:3000");
 const messageForm = document.getElementById("messageForm");
 const messageInput = document.getElementById("messageInput");
 const messageContainer = document.getElementById("messageContainer");
