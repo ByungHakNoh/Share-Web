@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.php",
   "scripts": {
-    "devStart": "nodemon app/node/server.js"
+    "devStart": "nodemon app/node/server.js",
+    "devScrap": "nodemon app/node/scraping.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/ByungHakNoh/Share-Web#readme",
   "dependencies": {
+    "axios": "^0.19.2",
+    "cheerio": "^1.0.0-rc.3",
     "express": "^4.17.1",
     "file-system": "^2.2.2",
     "socket.io": "^2.3.0"
