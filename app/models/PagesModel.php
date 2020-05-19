@@ -67,4 +67,33 @@ class PagesModel extends Model
 
         return $newAverage;
     }
+
+    // 로컬 파일데이터를 읽는 메소드 -> 부모클래스에 추가해도 됨
+    public function readLocalFile($filename, $retbytes = TRUE)
+    {
+        define('CHUNK_SIZE', 1024 * 1024);
+        $buffer = '';
+        $cnt    = 0;
+        $handle = fopen($filename, 'rb');
+
+        if ($handle === false) {
+            return false;
+        }
+
+        // 
+        while (!feof($handle)) {
+            $buffer = fread($handle, CHUNK_SIZE);
+            ob_flush();
+            flush();
+
+            if ($retbytes) {
+                $cnt += strlen($buffer);
+            }
+        }
+        fclose($handle);
+
+        // memo : true를 통해 stdClass를 array로 변환
+        $dataList = json_decode($buffer, true);
+        $this->returnedData['scrapData'] = $dataList;
+    }
 }
