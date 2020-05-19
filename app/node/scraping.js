@@ -1,7 +1,7 @@
 const axios = require("axios");
 const cheerio = require("cheerio");
 const fs = require("fs");
-const writeStream = fs.createWriteStream("app/data/test.csv");
+const writeStream = fs.createWriteStream("app/data/FashionNews.csv");
 
 const targetDomain = "https://www.fashionn.com/";
 let targetPage;
