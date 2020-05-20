@@ -24,6 +24,14 @@
         <video id="player" class="video-js vjs-default-skin" controls>
             <source src="https://share-fashion.ga/src/video/hls/test.m3u8" type="application/x-mpegURL" />
         </video>
+
+        <div id="overlayBox" class="overlay" hidden>
+            <img src="src/image/img.png" alt="">
+            <div>
+                <small id="overlayText">떙떙 회원님이 얼마를 후원했습니다</small>
+            </div>
+        </div>
+        <button id="donateBtn">후원하기</button>
     </div>
 
     <!-- 채팅창 박스 -->
