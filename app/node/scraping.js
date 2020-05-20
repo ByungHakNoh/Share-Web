@@ -21,10 +21,14 @@ function scrapFashionPage(page) {
         const imageTag = $(element).children().first().children("a").first().children();
         const dateTag = $(element).children().last();
 
-        const image = targetDomain + imageTag.attr("src");
+        let image = targetDomain + imageTag.attr("src");
         const title = infoTag.attr("title");
         const link = targetDomain + infoTag.attr("href");
         const date = dateTag.text().replace(/\s\s+/g, "");
+
+        if (image == targetDomain + "undefined") {
+          image = null;
+        }
 
         newsList[index] = { image, title, link, date };
       });
@@ -37,7 +41,7 @@ function getScrappedData(page) {
   let nextPage;
   return scrapFashionPage(page).then(data => {
     nextPage = page + 1;
-    pageList[`page${page}`] = data;
+    pageList[page] = data;
 
     if (nextPage < 5) {
       return getScrappedData(nextPage);
