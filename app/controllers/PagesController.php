@@ -40,10 +40,14 @@ class PagesController extends Controller
     // 패션 뉴스 크롤링 페이지
     public function news()
     {
-        $model = $this->createModel('PagesModel');
-        $model->readLocalFile('app/data/FashionNews.csv');
-        $viewData = $model->getReturnedData();
+        $currentPage = isset($_GET['page']) ? $_GET['page'] : 1;
 
+        $model = $this->createModel('PagesModel');
+        // $model->readFile('app/data/FashionNews.csv');
+        $model->readLocalFile('app/data/FashionNews.csv');
+
+        $viewData = $model->getReturnedData();
+        $viewData['currentPage'] = $currentPage;
         $view = $this->createView('news', $viewData);
         return $view->loadView();
     }
