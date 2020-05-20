@@ -2,6 +2,9 @@ const socket = io.connect("https://share-fashion.ga:3000");
 const messageForm = document.getElementById("messageForm");
 const messageInput = document.getElementById("messageInput");
 const messageContainer = document.getElementById("messageContainer");
+const donateBtn = document.getElementById("donateBtn");
+const overlayBox = document.getElementById("overlayBox");
+const overlayText = document.getElementById("overlayText");
 
 // 로그인을 하지 않으면 채팅 칠 수 없도록 구현
 messageInput.addEventListener("focus", function () {
@@ -21,11 +24,28 @@ messageForm.addEventListener("submit", event => {
   appendMyChat(message);
 });
 
+donateBtn.addEventListener("click", () => {
+  socket.emit("send-donation", { donation: "1000" });
+  overlayText.innerText = `${userNickName}님이 1000원을 후원했습니다`;
+  overlayBox.hidden = false;
+  setTimeout(() => {
+    overlayBox.hidden = true;
+  }, 3000);
+});
+
 // 새로운 유저가 대화방에 참여하면 서버에 참여한 유저명을 전달
 if (userNickName != "") {
   console.log("yes");
   socket.emit("new-user", userNickName);
 }
+
+socket.on("donation", data => {
+  overlayText.innerText = `${data.name}님이 ${data.donation}을 후원했습니다`;
+  overlayBox.hidden = false;
+  setTimeout(() => {
+    overlayBox.hidden = true;
+  }, 3000);
+});
 
 // 서버로 부터 받은 채팅 데이터로 채팅을 보여준다.
 socket.on("chat-message", data => {
