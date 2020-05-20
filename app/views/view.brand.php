@@ -25,7 +25,7 @@
             <figure>
                 <a href=<?= $brand->getLink() ?>><img src=<?= $brand->getImage() ?> alt=""></a>
                 <figcaption><?= $brand->getName() ?></figcaption>
-                <h4><?= '총 평점 : ' . $brand->getAverageRate() ?></h4>
+                <h4><?= '총 평점 : ' . round($brand->getAverageRate(), 2) ?></h4>
             </figure>
         <?php endforeach ?>
 
