@@ -1,0 +1,61 @@
+.mainContainer {
+  margin-top: 50px;
+  margin-left: 500px;
+  margin-right: 500px;
+}
+
+.newsContainer {
+  margin-top: 10px;
+}
+
+.newsContainer figure {
+  display: inline-block;
+}
+
+.newsContainer figure a {
+  text-decoration: none;
+}
+
+.newsContainer figure a img {
+  width: 210px;
+  height: 125px;
+}
+
+.newsContainer div {
+  display: inline-block;
+  margin-left: 30px;
+  position: relative;
+  top: -40px;
+}
+
+.newsContainer div a {
+  text-decoration: none;
+  position: relative;
+  top: -30px;
+}
+
+.pagination {
+  text-align: center;
+  margin: 20px;
+}
+
+.pagination a button {
+  display: inline-block;
+  padding: 15px;
+  font-weight: 800;
+  margin: 3px;
+  cursor: pointer;
+  border: 0;
+  border-radius: 4px;
+  font: inherit;
+  outline: none;
+  font-weight: 900;
+}
+
+.pagination a button:hover {
+  transform: translateY(3px);
+}
+
+.pagination a button.active {
+  background-color: darkgrey;
+}
