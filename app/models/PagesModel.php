@@ -96,4 +96,11 @@ class PagesModel extends Model
         $dataList = json_decode($buffer, true);
         $this->returnedData['scrapData'] = $dataList;
     }
+
+    public function readFile($filePath)
+    {
+        $fileData = file_get_contents($filePath);
+        $dataArray = json_decode($fileData, true);
+        $this->returnedData['scrapData'] = $dataArray;
+    }
 }
