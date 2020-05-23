@@ -30,14 +30,24 @@
         </div>
     <?php endif ?>
     <div class="homeMainBoard">
-        <div class="M">
-            패션 소식
+        <div class="bestBrandContainer">
+            <div class="moreInfo"><a href="/brand">더 많은 내용보기</a></div>
+            <h2>회원 선호 브랜드</h2>
+            <?php foreach ($brandData['bestBrands'] as $brand) : ?>
+                <figure>
+                    <a href=<?= $brand->getLink() ?>><img src=<?= $brand->getImage() ?> alt=""></a>
+                    <figcaption><?= $brand->getName() ?></figcaption>
+                    <h4><?= '총 평점 : ' . round($brand->getAverageRate(), 2) ?></h4>
+                </figure>
+            <?php endforeach ?>
         </div>
 
 
         <div class="boardContainer">
-            <h3>자유 계시판</h3>
-            <a id="moreInfo" href="/board">더 많은 내용보기</a>
+            <div class="moreInfo"> <a href="/board">더 많은 내용보기</a></div>
+            <div>
+                <h2>자유 계시판</h2>
+            </div>
             <div class="tapBtnContainer">
                 <button class="active" id="recentPostBtn">최신 순</button>
                 <button id="viewsPostBtn">조회수 순</button>
@@ -53,7 +63,7 @@
                     </tr>
                 </thead>
                 <tbody id="recentPostContainer">
-                    <?php foreach ($postListByID as $post) : ?>
+                    <?php foreach ($boardData['postListByID'] as $post) : ?>
                         <tr>
                             <td width="70"><?= $post->getID(); ?></td>
                             <td width="700"><a href=<?= '/board-read?id=' . $post->getID(); ?>><?= $post->getTitle(); ?></a>
@@ -65,7 +75,7 @@
                     <?php endforeach; ?>
                 </tbody>
                 <tbody id="viewsPostContainer" hidden>
-                    <?php foreach ($postListByHit as $post) : ?>
+                    <?php foreach ($boardData['postListByHit'] as $post) : ?>
                         <tr>
                             <td width="70"><?= $post->getID(); ?></td>
                             <td width="700"><a href=<?= '/board-read?id=' . $post->getID(); ?>><?= $post->getTitle(); ?></a>
