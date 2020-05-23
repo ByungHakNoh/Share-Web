@@ -33,12 +33,17 @@
             <?php foreach ($postList as $post) : ?>
                 <tbody>
                     <tr>
-                        <td width="70"><?= $post->getID(); ?></td>
-                        <td width="700"><a href=<?= '/board-read?id=' . $post->getID(); ?>><?= $post->getTitle(); ?></a>
+                        <?php if ($post->getCommentCount() == 0) : ?>
+                            <?php $commentCount = '' ?>
+                        <?php else : ?>
+                            <?php $commentCount = '[' . $post->getCommentCount() . ']' ?>
+                        <?php endif ?>
+                        <td width="70"><?= $post->getID() ?></td>
+                        <td width="700"><a href=<?= '/board-read?id=' . $post->getID(); ?>><?= $post->getTitle() ?><p><?= ' ' . $commentCount ?></p></a>
                         </td>
-                        <td width="150"><?= $post->getWriter(); ?></td>
-                        <td width="120"><?= $post->getDate(); ?></td>
-                        <td width="100"><?= $post->getHit(); ?></td>
+                        <td width="150"><?= $post->getWriter() ?></td>
+                        <td width="120"><?= $post->getDate() ?></td>
+                        <td width="100"><?= $post->getHit() ?></td>
                     </tr>
                 </tbody>
             <?php endforeach; ?>
@@ -52,7 +57,7 @@
             <?php endif; ?>
 
             <!-- 페이징 버튼 생성 -->
-            <?php for ($page = 1; $page <= $numberOfPage; $page++) { ?>
+            <?php for ($page = $startPage; $page <= $endPage; $page++) { ?>
 
                 <?php if ($currentPage == $page) : ?>
                     <a href=<?= "/board?page={$page}" ?>><button class="active"><?= $page ?></button></a>
