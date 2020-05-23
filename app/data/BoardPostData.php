@@ -10,6 +10,7 @@ class BoardPostData
     private $title;
     private $date;
     private $hit;
+    private $comment_count;
 
     public function getID()
     {
@@ -34,5 +35,10 @@ class BoardPostData
     public function getHit()
     {
         return $this->hit;
+    }
+
+    public function getCommentCount()
+    {
+        return $this->comment_count;
     }
 }
