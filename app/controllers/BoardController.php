@@ -19,7 +19,6 @@ class BoardController extends Controller
         $model->fetchPostData($currentPage, $resultPerPage);
 
         $viewData = $model->getReturnedData();
-        $viewData['currentPage'] = $currentPage;
         $view = $this->createView('board', $viewData);
         return $view->loadView();
     }
@@ -130,12 +129,12 @@ class BoardController extends Controller
 
     public function boardDeleteComment()
     {
-        $deleteCommentID = $_POST['deleteCommentID'];
         $postID = $_POST['id'];
+        $deleteCommentID = $_POST['deleteCommentID'];
         $directUrl = 'board-read';
 
         $model = $this->createModel('BoardModel');
-        $model->deleteComment($deleteCommentID);
+        $model->deleteComment($postID, $deleteCommentID);
         header("Location:/{$directUrl}?id={$postID}");
         exit;
     }
