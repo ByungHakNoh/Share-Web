@@ -19,6 +19,7 @@ $router->post('board-reply', 'BoardController@boardReply');
 $router->post('board-delete-reply', 'BoardController@boardDeleteReply');
 
 $router->get('broadcast', 'PagesController@broadcast');
+$router->post('broadcast', 'PagesController@broadcast');
 // 로그인 루트
 $router->get('login', 'UserController@login');
 $router->post('login-startSession', 'UserController@login');
