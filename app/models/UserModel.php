@@ -10,6 +10,9 @@ use core\mvc\Model;
 
 class UserModel extends Model
 {
+    private $tableName = 'user';
+    private $dataClass = 'app\data\UserInfo';
+
     // 회원가입 성공 시 데이터베이스에 회원 정보 저장하는 메소드
     public function uploadUser($userID, $password, $nickName, $sex)
     {
@@ -56,12 +59,28 @@ class UserModel extends Model
         $nickName = $userInfo[0]->getNickName();
         $sex = $userInfo[0]->getSex();
         $admin = $userInfo[0]->getIsAdmin();
+        $donationMoney = $userInfo[0]->getDonationMoney();
 
         // 세션에 사용자 정보를 등록한다
         $_SESSION['userID'] = $userID;
         $_SESSION['nickName'] = $nickName;
         $_SESSION['sex'] = $sex;
         $_SESSION['admin'] = $admin;
+        $_SESSION['donationMoney'] = $donationMoney;
+    }
+
+    public function uploadDonationMoney($nickName, $donationMoney)
+    {
+        $columnKeyData['nick_name'] = '"' . $nickName . '"';
+        $keyValueData['donation_money'] = $donationMoney;
+        App::get('database')->updateByName($this->tableName, $columnKeyData, $keyValueData);
+    }
+
+    function fetchDonationData($nickName)
+    {
+        $keyValueData['nick_name'] = '"' . $nickName . '"';
+        $userInfo = App::get('database')->fetchValueByName($this->tableName,  $keyValueData, $this->dataClass);
+        return $userInfo[0]->getDonationMoney();
     }
 
     // 관리자 페이지 용 데이터 저장하기
