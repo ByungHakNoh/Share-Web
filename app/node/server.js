@@ -28,11 +28,11 @@ const users = {};
 
 io.on("connection", socket => {
   socket.on("send-donation", donation => {
-    socket.broadcast.emit("donation", { donation: donation, name: users[socket.id] });
+    socket.broadcast.emit("donation", { name: users[socket.id], donation: donation });
   });
 
   socket.on("send-chat-message", message => {
-    socket.broadcast.emit("chat-message", { message: message, name: users[socket.id] });
+    socket.broadcast.emit("chat-message", { name: users[socket.id], message: message });
   });
 
   socket.on("new-user", name => {
