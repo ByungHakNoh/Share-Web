@@ -28,11 +28,21 @@ class PagesController extends Controller
         $startNumber = 0;
         $endNumber = 9;
 
-        $model = $this->createModel('BoardModel');
-        $model->fetchDataByID($startNumber, $endNumber, 'desc');
-        $model->fetchDataByHit($startNumber, $endNumber, 'desc');
+        // 자유계시판, 브랜드 모델 생성 
+        $boardModel = $this->createModel('BoardModel');
+        $brandModel = $this->createModel('PagesModel');
 
-        $viewData = $model->getReturnedData();
+        // 자유계시판 중 조회수별, 최신 순으로 데이터를 가져오기
+        $boardModel->fetchDataByID($startNumber, $endNumber, 'desc');
+        $boardModel->fetchDataByHit($startNumber, $endNumber, 'desc');
+        // top 3 브랜드 정보 가져오기
+        $brandModel->getBestBrand();
+
+        $viewData = [
+            'brandData' => $brandModel->getReturnedData(),
+            'boardData' => $boardModel->getReturnedData()
+        ];
+
         $view = $this->createView('home', $viewData);
         return $view->loadView();
     }
@@ -78,8 +88,6 @@ class PagesController extends Controller
             exit(json_encode($response));
         } else {
 
-            $viewData = [];
-
             if (isset($_SESSION['nickName'])) {
 
                 $nickName = $_SESSION['nickName'];
@@ -95,8 +103,31 @@ class PagesController extends Controller
     // 방송 보기 페이지
     public function broadcast()
     {
-        $view = $this->createView('broadcast');
-        return $view->loadView();
+        $model = $this->createModel('UserModel');
+
+        if (isset($_POST['donationMoney'])) {
+            $nickName = $_POST['nickName'];
+            $donationMoney = $_POST['donationMoney'];
+
+            $model->uploadDonationMoney($nickName, $donationMoney);
+            exit();
+        } else {
+
+            if (isset($_SESSION['nickName'])) {
+                $nickName = $_SESSION['nickName'];
+                $donationMoney = $model->fetchDonationData($nickName);
+            } else {
+                $nickName = null;
+                $donationMoney = null;
+            }
+
+            $viewData = [
+                'nickName' => $nickName,
+                'donationMoney' => $donationMoney
+            ];
+            $view = $this->createView('broadcast', $viewData);
+            return $view->loadView();
+        }
     }
 
     // 쿠키 관련 post 메소드 처리하는 페이지
