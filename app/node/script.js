@@ -3,8 +3,6 @@ const messageForm = document.getElementById("messageForm");
 const messageInput = document.getElementById("messageInput");
 const messageContainer = document.getElementById("messageContainer");
 const donateBtn = document.getElementById("donateBtn");
-const overlayBox = document.getElementById("overlayBox");
-const overlayText = document.getElementById("overlayText");
 
 // 로그인을 하지 않으면 채팅 칠 수 없도록 구현
 messageInput.addEventListener("focus", function () {
@@ -21,35 +19,40 @@ messageForm.addEventListener("submit", event => {
   const message = messageInput.value;
   socket.emit("send-chat-message", message);
   messageInput.value = null;
-  appendMyChat(message);
+  appendMyChat(message, "message");
 });
 
 donateBtn.addEventListener("click", () => {
-  socket.emit("send-donation", { donation: "1000" });
-  overlayText.innerText = `${userNickName}님이 1000원을 후원했습니다`;
-  overlayBox.hidden = false;
-  setTimeout(() => {
-    overlayBox.hidden = true;
-  }, 3000);
+  const donationInput = document.getElementById("donationInput");
+  const currentMoneyText = document.getElementById("currentMoney");
+  const popUpBox = document.getElementById("donationBox");
+  const donationValue = parseInt(donationInput.value);
+  const currentMoney = parseInt(currentMoneyText.innerText);
+
+  if (donationValue <= currentMoney) {
+    socket.emit("send-donation", donationValue);
+    donationAlert(userNickName, donationInput.value);
+    appendMyChat(donationInput.value, "donation");
+    uploadMoneyData(-donationValue);
+    closeDonatePopUP(popUpBox);
+  } else {
+    alert("보유 금액이 부족합니다");
+  }
 });
 
 // 새로운 유저가 대화방에 참여하면 서버에 참여한 유저명을 전달
 if (userNickName != "") {
-  console.log("yes");
   socket.emit("new-user", userNickName);
 }
 
 socket.on("donation", data => {
-  overlayText.innerText = `${data.name}님이 ${data.donation}을 후원했습니다`;
-  overlayBox.hidden = false;
-  setTimeout(() => {
-    overlayBox.hidden = true;
-  }, 3000);
+  donationAlert(data.name, data.donation);
+  appendChatDialog(data.name, data.donation, "donation");
 });
 
 // 서버로 부터 받은 채팅 데이터로 채팅을 보여준다.
 socket.on("chat-message", data => {
-  appendChatDialog(data.name, data.message);
+  appendChatDialog(data.name, data.message, "message");
 });
 
 // 서버로부터 대화방에 참여한 새로운 유저 이름을 표시
@@ -68,15 +71,39 @@ socket.on("user-disconnected", name => {
   }
 });
 
+function donationAlert(nickName, donationAmount) {
+  const overlayBox = document.getElementById("overlayBox");
+  const overlayText = document.getElementById("overlayText");
+
+  overlayText.innerHTML = `${nickName}님이 ${donationAmount}원을 후원했습니다`;
+  overlayBox.hidden = false;
+  setTimeout(() => {
+    overlayBox.hidden = true;
+  }, 3000);
+}
+
 // 대화방에 참가한 다른 사람들의 채팅 박스 생성
-function appendChatDialog(name, data) {
+function appendChatDialog(name, data, type) {
   const nickNameBox = document.createElement("div");
   const messageBox = document.createElement("main");
   const nickName = document.createElement("small");
   const message = document.createElement("p");
 
+  switch (type) {
+    case "message":
+      message.innerText = data;
+      break;
+
+    case "donation":
+      const donationImage = document.createElement("img");
+      donationImage.src = "/src/image/img.png";
+      message.innerText = `${name}님이 ${data}원을 후원했습니다`;
+      messageBox.append(donationImage);
+      break;
+  }
+
   nickName.innerText = name + ":";
-  message.innerText = data;
+  // message.innerText = data;
 
   nickNameBox.append(nickName);
   messageBox.append(message);
@@ -85,12 +112,24 @@ function appendChatDialog(name, data) {
 }
 
 // 본인의 채팅 박스 생성
-function appendMyChat(data) {
+function appendMyChat(data, type) {
   const parentDiv = document.createElement("div");
   const messageBox = document.createElement("main");
   const message = document.createElement("p");
 
-  message.innerText = data;
+  switch (type) {
+    case "message":
+      message.innerText = data;
+      break;
+
+    case "donation":
+      const donationImage = document.createElement("img");
+      donationImage.src = "/src/image/img.png";
+      message.innerText = `${data}원을 후원했습니다`;
+      messageBox.append(donationImage);
+      break;
+  }
+
   messageBox.style.backgroundColor = "yellow";
   parentDiv.style.textAlign = "end";
 
