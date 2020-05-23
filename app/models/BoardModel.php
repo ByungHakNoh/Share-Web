@@ -39,8 +39,48 @@ class BoardModel extends Model
         $numberOfPage = App::get('database')->paginationPageNum($this->tableName, $resultPerPage);
         $postList = App::get('database')->pagination($this->tableName, $dataClass, $currentPage, $resultPerPage);
 
+        $this->dataForPagination($currentPage, $numberOfPage);
+        $this->returnedData['currentPage'] = $currentPage;
         $this->returnedData['numberOfPage'] = $numberOfPage;
         $this->returnedData['postList'] = $postList;
+    }
+
+    // 페이징 시작 번호와 끝 번호 정하는 메소드
+    private function dataForPagination($currentPage, $numberOfPage)
+    {
+        $startPage = null;
+        $endPage = null;
+
+        if ($numberOfPage <= 10) {
+            $startPage = 1;
+            $endPage = $numberOfPage;
+        } else {
+            if ($currentPage <= 10) {
+                $startPage = 1;
+                $endPage = 10;
+            } else {
+
+                $firstDigit = substr($currentPage, strlen($currentPage) - 1);
+
+                if ($firstDigit == 0) {
+
+                    $startPage = substr($currentPage, 0, strlen($currentPage) - 1) * 10 - 9;
+                    $endPage = $startPage + 10 - 1;
+                } else {
+
+                    $startPage = substr($currentPage, 0, strlen($currentPage) - 1) * 10 + 1;
+                    $endPage = $startPage + 10 - 1;
+
+                    if ($numberOfPage < $endPage) {
+
+                        $endPage = $numberOfPage;
+                    }
+                }
+            }
+        }
+
+        $this->returnedData['startPage'] = $startPage;
+        $this->returnedData['endPage'] = $endPage;
     }
 
     // 자유게시판 글을 읽는 페이지를 들어갈 때 사용하는 메소드 -> 클릭한 계시글에 관한 글을 데이터베이스에서 가져온다.
@@ -89,7 +129,10 @@ class BoardModel extends Model
     // 댓글 추가하기
     public function addComment($postID, $writer, $comment)
     {
+        // 댓글 겟수 증가
+        $keyValueData = ['comment_count' => 'comment_count+1'];
         $this->saveComment($postID, $writer, $comment);
+        App::get('database')->updateByID($this->tableName, $postID,  $keyValueData);
     }
 
     // 댓글 수정하기
@@ -101,13 +144,17 @@ class BoardModel extends Model
     }
 
     // 댓글 삭제하기
-    public function deleteComment($requestID)
+    public function deleteComment($postID, $commentID)
     {
         $tableComment = 'free_board_comment';
         $tableReply = 'free_board_reply';
         $columnName = 'comment_id';
-        App::get('database')->deleteByID($tableComment, $requestID);
-        App::get('database')->deleteByColumn($tableReply, $columnName, $requestID);
+        // 댓글 갯수 감소
+        $keyValueData = ['comment_count' => 'comment_count-1'];
+
+        App::get('database')->deleteByID($tableComment, $commentID);
+        App::get('database')->deleteByColumn($tableReply, $columnName, $commentID);
+        App::get('database')->updateByID($this->tableName, $postID,  $keyValueData);
     }
 
 
@@ -171,25 +218,32 @@ class BoardModel extends Model
     private function modifyTagElement($tags, $type)
     {
         foreach ($tags as $tag) {
-            $srcInString = $tag->getAttribute('src');
-            $img = $this->decodeBase64($srcInString);
 
-            // 파일의 타입 가져오기
-            $dataInfo = explode(";", $srcInString)[0];
-            $fileExt = str_replace("data:{$type}/", '', $dataInfo);
+            $isLocal = $tag->getAttribute('data-local');
 
-            // 고유한 이름을 부여하여 이미지 파일이름을 정하고 파일 객체 생성
-            $newFileName = str_replace(".", "", uniqid("free-board:", true));
-            $filename = $newFileName . '.' . $fileExt;
-            $file = "src/{$type}/{$type}-database/" . $filename;
+            // 로컬에 저장이 되어있지 않다면 src를 변환하여 로컬에 저장
+            if ($isLocal == null) {
+                $srcInString = $tag->getAttribute('src');
+                $content = $this->decodeBase64($srcInString);
 
-            // 이미지 서버 컴퓨터에 저장하기
-            file_put_contents($file, $img);
-            $url = 'https://share-fashion.ga/' . $file;
+                // 파일의 타입 가져오기
+                $dataInfo = explode(";", $srcInString)[0];
+                $fileExt = str_replace("data:{$type}/", '', $dataInfo);
 
-            $tag->setAttribute('src', $url);
-            $tag->setAttribute('data-original-filename', $tag->getAttribute('data-filename'));
-            $tag->removeAttribute('data-filename');
+                // 고유한 이름을 부여하여 이미지 파일이름을 정하고 파일 객체 생성
+                $newFileName = str_replace(".", "", uniqid("free-board:", true));
+                $filename = $newFileName . '.' . $fileExt;
+                $file = "src/{$type}/{$type}-database/" . $filename;
+
+                // 이미지 서버 컴퓨터에 저장하기
+                file_put_contents($file, $content);
+                $url = 'https://share-fashion.ga/' . $file;
+
+                $tag->setAttribute('src', $url);
+                // 로컬로 저장되어 있는지 여부를 확인하는 요소
+                $tag->setAttribute('data-local', true);
+                $tag->removeAttribute('data-filename');
+            }
         }
     }
 
