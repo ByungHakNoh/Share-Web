@@ -20,7 +20,9 @@
 <body>
     <?php require 'holder/main/bodyHeadPage.php'; ?>
     <div class="bestBrandContainer">
-        <h1>TOP 3 회원 선호 브랜드</h1>
+        <div>
+            <h1>TOP 3 회원 선호 브랜드</h1>
+        </div>
         <?php foreach ($bestBrands as $brand) : ?>
             <figure>
                 <a href=<?= $brand->getLink() ?>><img src=<?= $brand->getImage() ?> alt=""></a>
@@ -28,15 +30,15 @@
                 <h4><?= '총 평점 : ' . round($brand->getAverageRate(), 2) ?></h4>
             </figure>
         <?php endforeach ?>
-
     </div>
 
-    <!-- <div class="tabBtnContainer">
-        <button>최신 업데이트 순</button>
-        <button>평점 순</button>
-    </div> -->
-    <main class="recentBrandContainer">
-    </main>
+    <div class="brandContainer">
+        <div>
+            <h1>브랜드 평점</h1>
+        </div>
+        <main class="recentBrandContainer">
+        </main>
+    </div>
     <footer>
     </footer>
 
