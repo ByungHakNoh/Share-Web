@@ -27,6 +27,17 @@
   font-size: 14px;
 }
 
+.boardContainer tbody td a {
+  text-decoration: none;
+}
+
+.boardContainer tbody td a p {
+  position: relative;
+  top: -2px;
+  display: inline;
+  color: red;
+}
+
 .pagination {
   margin: 20px;
 }
