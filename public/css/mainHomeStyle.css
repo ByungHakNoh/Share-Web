@@ -52,6 +52,32 @@
   background-color: yellowgreen;
 }
 
+.bestBrandContainer {
+  width: auto;
+  height: auto;
+  margin-left: 400px;
+  margin-right: 400px;
+  padding: 20px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 5px 5px 5px gainsboro;
+}
+
+.bestBrandContainer figure {
+  width: 250px;
+  margin: 20px;
+  display: inline-block;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  background-color: white;
+  box-shadow: 5px 5px 5px grey;
+}
+
+.bestBrandContainer figure img {
+  width: 250px;
+  height: 250px;
+}
+
 .boardContainer {
   height: auto;
   width: auto;
@@ -66,7 +92,8 @@
   box-shadow: 5px 5px 5px gainsboro;
 }
 
-#moreInfo {
+.moreInfo a {
+  margin-right: 50px;
   float: right;
 }
 
