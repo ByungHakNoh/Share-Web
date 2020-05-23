@@ -9,6 +9,7 @@ class UserInfo
     private $nick_name;
     private $sex;
     private $admin;
+    private $donation_money;
 
     public function getUserID()
     {
@@ -33,5 +34,10 @@ class UserInfo
     public function getIsAdmin()
     {
         return $this->admin;
+    }
+
+    public function getDonationMoney()
+    {
+        return $this->donation_money;
     }
 }
