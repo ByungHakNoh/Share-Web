@@ -129,6 +129,27 @@ class QueryBuilder
         return $stringFormat;
     }
 
+    public function updateByName($tableName, $columnKeyValue, $keyValueData)
+    {
+        $stringFormat = sprintf(
+            'update %s set %s = %s where %s=%s',
+            $tableName,
+            implode(', ', array_keys($keyValueData)),
+            implode(', ', array_values($keyValueData)),
+            implode(', ', array_keys($columnKeyValue)),
+            implode(', ', array_values($columnKeyValue))
+        );
+
+        try {
+
+            $statement = $this->pdo->prepare($stringFormat);
+            $statement->execute();
+        } catch (Exception $th) {
+
+            die('데이터 베이스 관련 에러 발생');
+        }
+    }
+
     // 수정이 필요할 것 같음... 좀 더 활용성 있게;
     public function updateByID($tableName, $requestID, $keyValueData)
     {
