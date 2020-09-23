@@ -125,7 +125,7 @@ class PagesController extends Controller
                 'nickName' => $nickName,
                 'donationMoney' => $donationMoney
             ];
-            $view = $this->createView('broadcast', $viewData);
+            $view = $this->createView('hackathon', $viewData);
             return $view->loadView();
         }
     }

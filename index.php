@@ -1,4 +1,9 @@
 <?php
+
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: POST, PUT, GET, DELETE');
+header('Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With');
+
 // 에러 로그 출력하는 코드
 error_reporting(E_ALL);
 ini_set('display_errors', 1);

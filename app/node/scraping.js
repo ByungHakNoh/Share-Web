@@ -23,7 +23,7 @@ function scrapFashionPage(page) {
 
         let image = targetDomain + imageTag.attr("src");
         const title = infoTag.attr("title");
-        const link = targetDomain + infoTag.attr("href");
+        const link = targetDomain + "board/" + infoTag.attr("href");
         const date = dateTag.text().replace(/\s\s+/g, "");
 
         if (image == targetDomain + "undefined") {

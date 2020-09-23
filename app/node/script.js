@@ -1,4 +1,5 @@
-const socket = io.connect("https://share-fashion.ga:3000");
+// const socket = io.connect("https://share-fashion.ga:3000");
+const socket = io.connect("http://13.125.99.215:3000");
 const messageForm = document.getElementById("messageForm");
 const messageInput = document.getElementById("messageInput");
 const messageContainer = document.getElementById("messageContainer");

@@ -25,7 +25,7 @@
     <?php require('holder/main/bodyHeadPage.php'); ?>
     <div class="broadcastContainer">
         <video id="player" class="video-js vjs-default-skin" controls>
-            <source src="https://share-fashion.ga/src/video/hls/test.m3u8" type="application/x-mpegURL" />
+            <source src="http://13.125.99.215/src/video/hls/test.m3u8" type="application/x-mpegURL" />
         </video>
 
         <div id="overlayBox" class="overlay" hidden>

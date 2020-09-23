@@ -198,7 +198,7 @@ class BoardModel extends Model
             $doc = new DOMDocument();
             libxml_use_internal_errors(true);
             $doc->loadHTML('<?xml encoding="utf-"?>' . $content);
-            //코드 정렬이 맞지 않아 php 열고 닫아줌 -> 추후 수정 요망
+            //코드 정렬이 맞지 않아 php 열고 닫아줌
 ?>
 <?php
             if (strpos($content, '<img')) {
